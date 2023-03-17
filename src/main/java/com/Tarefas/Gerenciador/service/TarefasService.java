@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.repository.TarefasRepository;
 
@@ -13,24 +15,32 @@ public class TarefasService {
 
     private TarefasRepository tarefasRepository;
 
+
     TarefasService(TarefasRepository tarefasRepository){
         this.tarefasRepository = tarefasRepository;
     }
+    
 
-    public Tarefas criarTarefa(Tarefas tarefas){
+
+    public Object criarTarefa(Tarefas tarefas){
+        
+        if(tarefasRepository.existsByTitulo(tarefas.getTitulo())){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Titulo já em uso");
+        }
+        if(tarefasRepository.existsByDescricao(tarefas.getDescricao())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Descrição já em uso");
+        }
+
         return tarefasRepository.save(tarefas);
-
+        
     }
     public List<Tarefas> listarTarefas(){
         return tarefasRepository.findAll();
 
     }
-    public Tarefas buscarTarefas(Long id){
-        Optional<Tarefas> tarefas = tarefasRepository.findById(id);
-        if(!tarefas.isPresent()){
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não foi encontrada");
-        }
-        return tarefas.get();
+    public Optional<Tarefas> buscarTarefas(Long id){
+         return tarefasRepository.findById(id);
+      
     }
     public Tarefas atualizarTarefas(Long id, Tarefas tarefasAtualizada){
         Optional<Tarefas> tarefasAntiga = tarefasRepository.findById(id);
