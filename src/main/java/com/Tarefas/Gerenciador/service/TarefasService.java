@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.repository.TarefasRepository;
 
@@ -37,7 +36,7 @@ public class TarefasService {
         Optional<Tarefas> tarefasAntiga = tarefasRepository.findById(id);
 
         if(!tarefasAntiga.isPresent()){
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa nãos encontrada");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
         }
         Tarefas tarefas = tarefasAntiga.get();
         tarefas.setTitulo(tarefasAtualizada.getTitulo());
