@@ -54,9 +54,11 @@ public class TarefasController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Tarefas> atualizarTarefa(@PathVariable Long id, @RequestBody Tarefas tarefaAtualizada){
-        Tarefas tarefas = tarefasService.atualizarTarefas(id, tarefaAtualizada);
-        return ResponseEntity.ok().body(tarefas);
+    public ResponseEntity<Tarefas> atualizarTarefa(@PathVariable Long id, @RequestBody @Valid TarefasDto tarefaDto){
+        var tarefas = new Tarefas();
+        BeanUtils.copyProperties(tarefaDto, tarefas);
+        Tarefas tarefasAtual = tarefasService.atualizarTarefas(id, tarefas);
+        return ResponseEntity.ok().body(tarefasAtual);
 
     }
     @DeleteMapping("/{id}")
