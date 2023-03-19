@@ -19,8 +19,6 @@ public class TarefasService {
     TarefasService(TarefasRepository tarefasRepository){
         this.tarefasRepository = tarefasRepository;
     }
-    
-
 
     public Object criarTarefa(Tarefas tarefas){
         

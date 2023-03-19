@@ -1,5 +1,6 @@
 package com.Tarefas.Gerenciador.dto;
 
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class UsuariosDto {
     private String password;
     @NotBlank
     private String email;
+
 
     
 }
