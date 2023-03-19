@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 public class TarefasDto {
 
     @NotBlank
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 20, message = "campo deve ser entre 3 e 20 ok")
     private String titulo;
     @NotBlank
     @Size(min = 5, max = 20)
