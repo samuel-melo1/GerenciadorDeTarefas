@@ -16,7 +16,15 @@ public class TarefasDto {
     private String prazo;
     @NotBlank
     private String status;
+ 
+    private Long id_usuario;
 
+    public Long getId_usuario() {
+        return id_usuario;
+    }
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
     public String getTitulo() {
         return titulo;
     }

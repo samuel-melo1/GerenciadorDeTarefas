@@ -1,8 +1,6 @@
 package com.Tarefas.Gerenciador.controller;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,15 +35,6 @@ public class UsuariosController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuariosService.salvar(usuarios));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials){
-        String email = credentials.get("email");
-        String password = credentials.get("password");
+    
 
-        Usuarios usuario = usuariosService.buscarPorEmail(email);
-        if(usuario == null){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        return ResponseEntity.ok().build();
-    }
 }

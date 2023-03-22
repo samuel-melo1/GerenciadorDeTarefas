@@ -1,13 +1,12 @@
 package com.Tarefas.Gerenciador.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +29,8 @@ public class Tarefas {
     private String status;
 
 
-    @ManyToMany(mappedBy = "tarefas")
-    private Set<Usuarios> usuarios = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuarios usuario;
     
 }

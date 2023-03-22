@@ -25,12 +25,10 @@ import jakarta.validation.Valid;
 public class TarefasController {
 
     private TarefasService tarefasService;
-   
 
     TarefasController(TarefasService tarefasService){
         this.tarefasService = tarefasService;
     }
-
 
     @PostMapping
     public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto){
@@ -66,5 +64,5 @@ public class TarefasController {
         tarefasService.excluirTarefas(id);
         return ResponseEntity.ok().build();
     }
-    
+
 }

@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class UsuariosDto {
 
     @NotBlank
-    private String username;
+    private String nome;
     @NotBlank
-    private String password;
+    private String senha;
     @NotBlank
     private String email;
 
