@@ -1,6 +1,6 @@
 package com.Tarefas.Gerenciador.controller;
 
-import java.net.URI;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
-import com.Tarefas.Gerenciador.model.Usuarios;
-import com.Tarefas.Gerenciador.repository.UsuariosRepository;
 import com.Tarefas.Gerenciador.service.TarefasService;
-import com.Tarefas.Gerenciador.service.UsuariosService;
+
 
 import jakarta.validation.Valid;
 
@@ -28,11 +26,11 @@ import jakarta.validation.Valid;
 public class TarefasController {
 
     private TarefasService tarefasService;
-    private UsuariosService usuariosService;
 
-    TarefasController(TarefasService tarefasService, UsuariosService usuariosService){
+
+    TarefasController(TarefasService tarefasService){
         this.tarefasService = tarefasService;
-        this.usuariosService = usuariosService;
+     
     }
 
     @PostMapping
@@ -70,22 +68,11 @@ public class TarefasController {
         return ResponseEntity.ok().build();
     }
 
-
-    @PostMapping("/tarefas-usuario")
-public ResponseEntity<TarefasDto> criarTarefaUsuario(@RequestBody TarefasDto tarefasDto){
-    Optional<Usuarios> usuarioOptional = usuariosService.buscarUsuarios(tarefasDto.getId_usuario());
-
-    if(!usuarioOptional.isPresent()){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("usuario não encontrado");
+    @PostMapping("/{id_usuario}")
+    public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody TarefasDto tarefasDto){
+        var tarefas = new  Tarefas();
+        BeanUtils.copyProperties(tarefasDto, tarefas);
+        Tarefas tarefa = tarefasService.criarTarefaUsuario(tarefas, id_usuario); 
+        return ResponseEntity.ok().body(tarefa);
     }
-    Usuarios usuarios = usuarioOptional.get();
-    Tarefas tarefa = new Tarefas(tarefasDto.getTitulo(), tarefasDto.getDescricao(), tarefasDto.getData_inicio(), tarefasDto.getPrazo(), tarefasDto.getStatus(), usuarios);
-
-    Tarefas tarefaCriada = tarefasService.criarTarefa(tarefa);
-    return ResponseEntity.created(URI.create("/usuarios/" + id_usuario + "/tarefas/" + tarefaCriadaDto.getId()))
-            .body(tarefaCriadaDto);
-}
-
-
-
 }

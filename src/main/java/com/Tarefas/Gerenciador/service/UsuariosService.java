@@ -2,7 +2,9 @@ package com.Tarefas.Gerenciador.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.repository.UsuariosRepository;
 
