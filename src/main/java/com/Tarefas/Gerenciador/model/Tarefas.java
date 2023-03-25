@@ -28,9 +28,10 @@ public class Tarefas {
     private String prazo;
     private String status;
 
-
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuarios usuario;
+
+
     
 }

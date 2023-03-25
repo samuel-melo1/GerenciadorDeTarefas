@@ -5,16 +5,22 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
+import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.repository.TarefasRepository;
+import com.Tarefas.Gerenciador.repository.UsuariosRepository;
 
 @Service
 public class TarefasService {
 
     private TarefasRepository tarefasRepository;
+    private UsuariosRepository usuariosRepository;
  
-    TarefasService(TarefasRepository tarefasRepository ){
+    TarefasService(TarefasRepository tarefasRepository, UsuariosRepository usuariosRepository ){
         this.tarefasRepository = tarefasRepository;
+        this.usuariosRepository = usuariosRepository;
     }
 
     public Object criarTarefa(Tarefas tarefas){
@@ -60,5 +66,24 @@ public class TarefasService {
         tarefasRepository.delete(tarefas.get());
     }
 
+    public Tarefas criarTarefaUsuario(TarefasDto tarefasDto, Long id_usuario){
+
+        Optional<Usuarios> usuarioOptional = usuariosRepository.findById(id_usuario);
+
+        if(!usuarioOptional.isPresent()){
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
+        }
+
+        Usuarios usuario = usuarioOptional.get();
+        Tarefas tarefa = new Tarefas();
+        tarefa.setTitulo(tarefasDto.getTitulo());
+        tarefa.setDescricao(tarefasDto.getDescricao());
+        tarefa.setData_inicio(tarefasDto.getData_inicio());
+        tarefa.setPrazo(tarefasDto.getPrazo());
+        tarefa.setStatus(tarefasDto.getStatus());
+        tarefa.setUsuario(usuario);
+
+        return tarefasRepository.save(tarefa);
     
+    }
 }

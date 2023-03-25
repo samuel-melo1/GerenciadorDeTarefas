@@ -1,7 +1,13 @@
 package com.Tarefas.Gerenciador.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TarefasDto {
 
     @NotBlank
@@ -18,43 +24,6 @@ public class TarefasDto {
     private String status;
  
     private Long id_usuario;
-
-    public Long getId_usuario() {
-        return id_usuario;
-    }
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public String getData_inicio() {
-        return data_inicio;
-    }
-    public void setData_inicio(String data_inicio) {
-        this.data_inicio = data_inicio;
-    }
-    public String getPrazo() {
-        return prazo;
-    }
-    public void setPrazo(String prazo) {
-        this.prazo = prazo;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
 
 }

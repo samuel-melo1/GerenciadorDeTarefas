@@ -1,7 +1,8 @@
 package com.Tarefas.Gerenciador.model;
 
-
+import java.util.ArrayList;
 import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,8 +26,8 @@ public class Usuarios {
     private String senha;
     private String email;
 
-    @OneToMany(mappedBy =   "usuario")
-    private List<Tarefas> tarefas;
+    @OneToMany(mappedBy = "usuario")
+    private List<Tarefas> tarefas = new ArrayList<>();
 
     
 }

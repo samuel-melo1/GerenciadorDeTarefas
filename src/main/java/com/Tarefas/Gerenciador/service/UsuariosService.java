@@ -2,9 +2,7 @@ package com.Tarefas.Gerenciador.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.repository.UsuariosRepository;
 
@@ -30,7 +28,9 @@ public class UsuariosService {
         Optional<Usuarios> usuariosOptional = usuariosRepository.findByEmail(email);
         return usuariosOptional.get();
     }
-
+    public Optional<Usuarios> buscarUsuarios(Long id){
+        return usuariosRepository.findById(id);
+    }
     
     
 }
