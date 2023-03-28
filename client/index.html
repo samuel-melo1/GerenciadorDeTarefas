@@ -3,31 +3,39 @@
   <head>
     <meta charset="UTF-8">
     <title>Gerenciador de Tarefas</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Gerenciador de Tarefas</h1>
     <form>
-      <label for="tarefa">Tarefa:</label>
-      <input type="text" id="tarefa" name="tarefa"><br><br>
+      <div class="form-group">
+        <label for="tarefa">Titulo da Tarefa:</label>
+        <input type="text" id="tarefa" name="tarefa">
+      </div>
       
-      <label for="descricao">Descrição:</label>
-      <textarea id="descricao" name="descricao"></textarea><br><br>
+      <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao"></textarea>
+      </div>
       
-      <label for="prioridade">Prioridade:</label>
-      <select id="prioridade" name="prioridade">
-        <option value="1">Baixa</option>
-        <option value="2">Média</option>
-        <option value="3">Alta</option>
-      </select><br><br>
+      <div class="form-group">
+        <label for="prioridade">Prioridade:</label>
+        <select id="prioridade" name="prioridade">
+          <option value="1">Baixa</option>
+          <option value="2">Média</option>
+          <option value="3">Alta</option>
+        </select>
+      </div>
       
-      <label for="usuario">Usuário:</label>
-      <input type="text" id="usuario" name="usuario"><br><br>
+      <div class="form-group">
+        <label for="usuario">Usuário:</label>
+        <input type="text" id="usuario" name="usuario">
+      </div>
       
       <input type="submit" value="Adicionar Tarefa">
     </form>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/client/script.js"></script>
+    <script src="client/script.js"></script>
   </body>
 </html>
