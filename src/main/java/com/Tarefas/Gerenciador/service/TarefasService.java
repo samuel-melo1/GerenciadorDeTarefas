@@ -64,16 +64,10 @@ public class TarefasService {
         tarefasRepository.delete(tarefas.get());
     }
 
-    public Tarefas criarTarefaUsuario(Tarefas tarefas, Long id_usuario){
-
-        Optional<Usuarios> usuarioOptional = usuariosRepository.findById(id_usuario);
-
-        if(!usuarioOptional.isPresent()){
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
-        }
-        Usuarios usuario = usuarioOptional.get();
-        tarefas.setUsuario(usuario);
-        return tarefasRepository.save(tarefas);
-    
+    public Tarefas criarTarefaUsuario(Tarefas tarefa, Long id_usuario) {
+        Usuarios usuario = usuariosRepository.findById(id_usuario)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        tarefa.setUsuario(usuario);
+        return tarefasRepository.save(tarefa);
     }
 }

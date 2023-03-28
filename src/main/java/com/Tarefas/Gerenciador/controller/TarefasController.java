@@ -69,10 +69,9 @@ public class TarefasController {
     }
 
     @PostMapping("/{id_usuario}")
-    public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody TarefasDto tarefasDto){
-        var tarefas = new  Tarefas();
-        BeanUtils.copyProperties(tarefasDto, tarefas);
-        Tarefas tarefa = tarefasService.criarTarefaUsuario(tarefas, id_usuario); 
-        return ResponseEntity.ok().body(tarefa);
+    public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody Tarefas tarefa) {
+        Tarefas novaTarefa = tarefasService.criarTarefaUsuario(tarefa, id_usuario);
+        return ResponseEntity.ok().body(novaTarefa);
     }
+
 }

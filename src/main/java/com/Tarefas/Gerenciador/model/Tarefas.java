@@ -29,9 +29,11 @@ public class Tarefas {
     private String prazo;
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     private Usuarios usuario;
+
 
 
     
