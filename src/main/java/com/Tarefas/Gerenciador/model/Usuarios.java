@@ -1,8 +1,10 @@
 package com.Tarefas.Gerenciador.model;
 
 
+import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuarios {
+public class Usuarios  {
+   
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +30,7 @@ public class Usuarios {
     private String senha;
     private String email;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private List<Tarefas> tarefas;
 }

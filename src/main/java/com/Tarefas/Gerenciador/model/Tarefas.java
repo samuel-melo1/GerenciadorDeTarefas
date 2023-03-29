@@ -1,8 +1,9 @@
 package com.Tarefas.Gerenciador.model;
 
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Tarefas {
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +31,7 @@ public class Tarefas {
     private String prazo;
     private String status;
 
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuarios usuario;
