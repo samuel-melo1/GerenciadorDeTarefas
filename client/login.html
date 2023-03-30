@@ -1,24 +1,62 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Login</h1>
-      <div class="form-container">
-        <div class="input-container">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email">
+
+<html lang="pt-br">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="styles.css">
+       
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function () {
+            $('#login').submit(function () {
+                var usuario = $('#usuario').val();
+                var senha = $('#senha').val();
+                if (usuario == 'admin' && senha == '123') {
+                    window.location.href = 'index.html';
+                } else {
+                    alert('usuario ou senha invalido');
+                }
+                return false;
+            });
+        });
+
+        </script>
+
+        <title>TelaLogin</title>
+
+    </head>
+
+    <body>
+        <div id="login">
+            <form class="card">
+                <div class="card-header">
+                    <h2>Login</h2>
+                </div>
+                <div class="card-content">
+                    <div class="card-content-area">
+                        <label for="usuario">Usuário</label>
+                        <input type="text" id="usuario" autocomplete="off" >
+                    </div>
+                    <div class="card-content-area">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" autocomplete="off" > 
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <input type="submit" value="Login" class="submit">
+                    <a href="#" class="recuperar_senha">Esqueceu a Senha?</a>
+                </div>
+            </form>
         </div>
-        <div class="input-container">
-          <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha">
-        </div>
-        <button type="submit">Entrar</button>
-      </div>
-    </div>
-  </body>
+
+    </body>
+
 </html>
