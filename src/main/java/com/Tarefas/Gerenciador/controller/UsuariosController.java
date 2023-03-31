@@ -29,12 +29,10 @@ public class UsuariosController {
         return ResponseEntity.ok().body(usuarios);
     }
     @PostMapping
-    public ResponseEntity<?> criarUsuario (@RequestBody @Valid UsuariosDto usuariosDto){
-        var usuarios = new Usuarios();
-        BeanUtils.copyProperties(usuariosDto, usuarios);
+    public ResponseEntity<Usuarios> criarUsuario (@RequestBody @Valid UsuariosDto usuariosDto){
+       var usuarios = new Usuarios();
+         BeanUtils.copyProperties(usuariosDto, usuarios);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuariosService.salvar(usuarios));
     }
-
-    
 
 }
