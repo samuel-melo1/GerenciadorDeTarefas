@@ -20,19 +20,34 @@ public class UsuariosController {
 
     private UsuariosService usuariosService;
 
-    UsuariosController(UsuariosService usuariosService){
+    UsuariosController(UsuariosService usuariosService) {
         this.usuariosService = usuariosService;
     }
+
     @GetMapping
-    public ResponseEntity<List<Usuarios>> listarUsuarios(){
+    public ResponseEntity<List<Usuarios>> listarUsuarios() {
         List<Usuarios> usuarios = usuariosService.listarUsuarios();
         return ResponseEntity.ok().body(usuarios);
     }
+
     @PostMapping
-    public ResponseEntity<Usuarios> criarUsuario (@RequestBody @Valid UsuariosDto usuariosDto){
-       var usuarios = new Usuarios();
-         BeanUtils.copyProperties(usuariosDto, usuarios);
+    public ResponseEntity<Usuarios> criarUsuario(@RequestBody @Valid UsuariosDto usuariosDto) {
+        var usuarios = new Usuarios();
+        BeanUtils.copyProperties(usuariosDto, usuarios);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuariosService.salvar(usuarios));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Usuarios usuarios) {
+        boolean authenticated = usuariosService.authenticate(usuarios.getEmail(), usuarios.getSenha());
+        if (authenticated) {
+            return ResponseEntity.ok("User authenticated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+    }
+
+
+   
 
 }
