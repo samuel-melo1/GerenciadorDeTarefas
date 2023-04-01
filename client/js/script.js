@@ -13,6 +13,7 @@ $(document).ready(function(){
             contentType: "application/json",
             success: function(response){
                 alert('Usuário cadastrado com sucesso!');
+                window.location.href = "login.html";
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);
