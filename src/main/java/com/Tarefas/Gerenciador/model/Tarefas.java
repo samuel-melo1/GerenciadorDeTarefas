@@ -1,7 +1,5 @@
 package com.Tarefas.Gerenciador.model;
 
-
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
