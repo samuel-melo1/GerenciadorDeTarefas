@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Gerenciador de Tarefas</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
   </head>
   <body>
     <h1>Gerenciador de Tarefas</h1>
@@ -17,6 +19,16 @@
         <label for="descricao">Descrição:</label>
         <textarea id="descricao" name="descricao"></textarea>
       </div>
+
+      <div class="form-group">
+        <label for="data_inicio">Data de Inicio</label>
+        <input type="date" id="data_inicio" >
+      </div>
+
+      <div class="form-group">
+        <label for="prazo">Prazo</label>
+        <input type="date" id="prazo" >
+      </div>
       
       <div class="form-group">
         <label for="prioridade">Prioridade:</label>
@@ -27,23 +39,14 @@
         </select>
       </div>
       
-      <div class="form-group">
-        <label for="usuario">Usuário:</label>
-        <input type="text" id="usuario" name="usuario">
-      </div>
-      
-      <input type="submit" value="Adicionar Tarefa">
       <p>
         <a href="login.html">
-          <input id="btn-voltar" type="button" value="Voltar para o Login">
+          <input type="submit" value="Adicionar Tarefa">
+          <input id="btn-voltar" type="button" value="Voltar ao Login">
         </a>
-        
       </p>
-      
     </form>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="client/script.js"></script>
+
     <div>
       <a href="login.html"></a>
     </div>
