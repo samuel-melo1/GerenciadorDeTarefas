@@ -70,8 +70,15 @@ public class TarefasController {
 
     @PostMapping("/{id_usuario}")
     public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody Tarefas tarefa) {
-        Tarefas novaTarefa = tarefasService.criarTarefaUsuario(tarefa, id_usuario);
-        return ResponseEntity.ok().body(novaTarefa);
+        Long id_user = tarefa.getId_tarefa();
+        if(id_usuario.equals(id_user)){
+            Tarefas novaTarefa = tarefasService.criarTarefaUsuario(tarefa, id_usuario);
+            return ResponseEntity.ok().body(novaTarefa);
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+       
     }
 
 

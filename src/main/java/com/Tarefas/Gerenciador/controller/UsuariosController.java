@@ -1,6 +1,7 @@
 package com.Tarefas.Gerenciador.controller;
 
 import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,12 @@ public class UsuariosController {
     public ResponseEntity<List<Usuarios>> listarUsuarios() {
         List<Usuarios> usuarios = usuariosService.listarUsuarios();
         return ResponseEntity.ok().body(usuarios);
+    }
+    @GetMapping("/id")
+    public ResponseEntity<Object> listarIdUsuario(@RequestBody @Valid UsuariosDto usuariosDto) {
+        var usuarios = new Usuarios();
+        BeanUtils.copyProperties(usuariosDto, usuarios);
+        return ResponseEntity.ok().body(usuarios.getId_usuario());
     }
 
     @PostMapping

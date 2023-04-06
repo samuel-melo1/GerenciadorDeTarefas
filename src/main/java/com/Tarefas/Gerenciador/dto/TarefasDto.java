@@ -22,8 +22,9 @@ public class TarefasDto {
     private String prazo;
     @NotBlank
     private String status;
+    @NotBlank
+    private String prioridade;
  
-    private Long id_usuario;
 
 
 }

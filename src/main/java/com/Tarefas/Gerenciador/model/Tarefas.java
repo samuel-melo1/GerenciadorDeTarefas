@@ -28,6 +28,7 @@ public class Tarefas {
     private String data_inicio;
     private String prazo;
     private String status;
+    private String prioridade;
 
     @JsonBackReference
     @ManyToOne
