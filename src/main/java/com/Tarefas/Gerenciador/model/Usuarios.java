@@ -25,7 +25,6 @@ public class Usuarios  {
     private String nome;
     private String senha;
     private String email;
-    private boolean log;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario")

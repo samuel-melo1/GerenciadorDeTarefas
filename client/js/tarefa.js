@@ -8,15 +8,14 @@ $(document).ready(function(){
             prazo: $("#prazo").val(),
             prioridade: $("prioridade").val(),
         }
-        var id;
+
+        
         $.ajax({
-            type: "GET",
-            url: 'http://localhost:8080/usuarios/id',
-            data: JSON.stringify(tarefas),
+            type: "POST",
+            url: 'http://localhost:8080/tarefas',
+            data: JSON.stringify(),
             contentType: "application/json",
             success: function (response) {
-                id = response;
-                console.log("ID do usuário logado:" + id);
             },
             error: function (xhr) {
                 console.error("Erro ao obter ID do usuário logado:", xhr.responseText);
@@ -24,3 +23,4 @@ $(document).ready(function(){
         });
     });
 });
+
