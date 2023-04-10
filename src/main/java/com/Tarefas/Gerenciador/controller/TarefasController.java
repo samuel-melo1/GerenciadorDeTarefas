@@ -63,7 +63,7 @@ public class TarefasController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarTarefa(@PathVariable Long id){
+    public ResponseEntity<Object> deletarTarefa(@PathVariable Long id){
         tarefasService.excluirTarefas(id);
         return ResponseEntity.ok().build();
     }
