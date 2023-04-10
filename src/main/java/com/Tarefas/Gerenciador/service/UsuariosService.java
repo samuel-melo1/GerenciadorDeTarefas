@@ -28,7 +28,7 @@ public class UsuariosService {
         return usuariosRepository.findById(id);
     }
 
-    public boolean authenticate(String email, String senha) {
+    public boolean autenticador(String email, String senha) {
         Optional<Usuarios> optionalUsuarios = usuariosRepository.findByEmail(email);
         if (optionalUsuarios.isPresent()) {
             Usuarios usuarios = optionalUsuarios.get();

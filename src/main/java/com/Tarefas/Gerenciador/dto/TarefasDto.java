@@ -17,10 +17,6 @@ public class TarefasDto {
     @Size(min = 5, max = 20)
     private String descricao;
     @NotBlank
-    private String data_inicio; 
-    @NotBlank
-    private String prazo;
-    @NotBlank
     private String status;
     @NotBlank
     private String prioridade;

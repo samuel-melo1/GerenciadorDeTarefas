@@ -1,5 +1,6 @@
 package com.Tarefas.Gerenciador.model;
 
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +26,8 @@ public class Tarefas {
 
     private String titulo;
     private String descricao;
-    private String data_inicio;
-    private String prazo;
+    private LocalDateTime data_inicio;
+    private LocalDateTime prazo;
     private String status;
     private String prioridade;
 

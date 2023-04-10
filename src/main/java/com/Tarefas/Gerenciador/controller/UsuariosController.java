@@ -46,8 +46,8 @@ public class UsuariosController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Usuarios usuarios) {
-        boolean authenticated = usuariosService.authenticate(usuarios.getEmail(), usuarios.getSenha());
-        if (authenticated) {
+        boolean autenticado = usuariosService.autenticador(usuarios.getEmail(), usuarios.getSenha());
+        if (autenticado) {
             return ResponseEntity.ok("User authenticated successfully");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
