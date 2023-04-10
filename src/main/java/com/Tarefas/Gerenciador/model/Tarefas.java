@@ -1,6 +1,7 @@
 package com.Tarefas.Gerenciador.model;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Tarefas {
+public class Tarefas implements Serializable {
+    private static final long serialVersionUID = 1L;
     
 
     @Id
@@ -26,8 +28,8 @@ public class Tarefas {
 
     private String titulo;
     private String descricao;
-    private LocalDateTime data_inicio;
-    private LocalDateTime prazo;
+    private LocalDate data_inicio;
+    private LocalDate prazo;
     private String status;
     private String prioridade;
 

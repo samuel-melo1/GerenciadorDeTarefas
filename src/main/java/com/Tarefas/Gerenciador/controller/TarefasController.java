@@ -1,9 +1,6 @@
 package com.Tarefas.Gerenciador.controller;
 
 
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
@@ -40,8 +37,6 @@ public class TarefasController {
     public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto){
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefasDto, tarefas);
-        tarefas.setData_inicio(LocalDateTime.now(ZoneId.of("UTC")));
-        tarefas.setPrazo(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(tarefasService.criarTarefa(tarefas));
     }
     
