@@ -1,8 +1,7 @@
 package com.Tarefas.Gerenciador.dto;
 import java.time.LocalDate;
 
-import com.Tarefas.Gerenciador.configs.LocalDateDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,10 +22,8 @@ public class TarefasDto {
     @Size(min = 5, max = 20)
     private String descricao;
     @NotNull
-    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate data_inicio; 
-    @NotNull
-    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @NotNull  
     private LocalDate prazo;
     @NotBlank
     private String status;

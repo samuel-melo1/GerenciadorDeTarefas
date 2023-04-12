@@ -9,7 +9,10 @@ $(document).ready(function(){
             status:$("#status").val(),
             prioridade: $("prioridade").val(),
         }
-
+        var localDateDataInicio = moment(data_inicio, 'YYYY-MM-DD').toObject();
+        var localDatePrazo = moment(prazo, 'YYYY-MM-DD').toObject();
+        var dataInicioObj = new Date(localDateDataInicio.years, localDateDataInicio.months, localDateDataInicio.date);
+        var prazoObj = new Date(localDatePrazo.years, localDatePrazo.months, localDatePrazo.date);
         
         $.ajax({
             url: 'http://localhost:8080/tarefas',
