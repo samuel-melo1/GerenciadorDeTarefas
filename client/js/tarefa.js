@@ -6,19 +6,24 @@ $(document).ready(function(){
             descricao: $("#descricao").val(),
             data_inicio: $("#data_inicio").val(),
             prazo: $("#prazo").val(),
+            status:$("#status").val(),
             prioridade: $("prioridade").val(),
         }
 
         
         $.ajax({
-            type: "POST",
             url: 'http://localhost:8080/tarefas',
-            data: JSON.stringify(),
+            type: 'POST',
+            data: JSON.stringify(tarefas),
             contentType: "application/json",
-            success: function (response) {
+            success: function(response){
+                alert('Tarefa cadastrada com sucesso!');
             },
-            error: function (xhr) {
-                console.error("Erro ao obter ID do usuário logado:", xhr.responseText);
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                console.log(status);
+                console.log(error);
+                alert("tente novamente - erro")
             }
         });
     });

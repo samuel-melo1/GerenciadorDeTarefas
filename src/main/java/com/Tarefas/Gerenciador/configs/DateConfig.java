@@ -1,30 +1,24 @@
 package com.Tarefas.Gerenciador.configs;
 
-import java.time.format.DateTimeFormatter;
-
+import java.time.LocalDate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 @Configuration
 public class DateConfig {
 
-    public static final String DATETIME_FORMAT = "yyyy-MM-dd";
-    public static LocalDateTimeSerializer lOCAL_DATETIME_SERIALIZER = new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-
     @Bean
-    @Primary
-    public ObjectMapper objectMapper(){
-        JavaTimeModule module = new JavaTimeModule();
-        module.addSerializer(lOCAL_DATETIME_SERIALIZER);
-        return new ObjectMapper().registerModule(module);
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(LocalDate.class, new LocalDateDeserializer());
+        objectMapper.registerModule(module);
+        return objectMapper;
     }
-    
-}
 
+}
 
 
 

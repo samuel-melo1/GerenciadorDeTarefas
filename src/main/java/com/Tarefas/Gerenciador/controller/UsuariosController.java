@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Tarefas.Gerenciador.dto.UsuariosDto;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.UsuariosService;
+
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @RestController
@@ -45,9 +47,10 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuarios usuarios) {
+    public ResponseEntity<String> login(@RequestBody Usuarios usuarios, HttpSession session) {
         boolean autenticado = usuariosService.autenticador(usuarios.getEmail(), usuarios.getSenha());
         if (autenticado) {
+            session.setAttribute("usuarioLogado", usuarios);
             return ResponseEntity.ok("User authenticated successfully");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
