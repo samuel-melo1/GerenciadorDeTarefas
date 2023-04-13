@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Tarefas implements Serializable {
     private static final long serialVersionUID = 1L;
     

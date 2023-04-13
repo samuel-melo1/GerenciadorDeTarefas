@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.service.TarefasService;
-
-
 import jakarta.validation.Valid;
 
 @RestController
@@ -28,12 +26,10 @@ public class TarefasController {
 
     private TarefasService tarefasService;
 
-
     TarefasController(TarefasService tarefasService){
         this.tarefasService = tarefasService;
      
     }
-
     @PostMapping
     public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto){
         var tarefas = new Tarefas();
@@ -54,7 +50,6 @@ public class TarefasController {
         }
         return ResponseEntity.ok().body(tarefasOptional);
     }
-    
     @PutMapping("/{id}")
     public ResponseEntity<Tarefas> atualizarTarefa(@PathVariable Long id, @RequestBody @Valid TarefasDto tarefaDto){
         var tarefas = new Tarefas();
@@ -68,7 +63,6 @@ public class TarefasController {
         tarefasService.excluirTarefas(id);
         return ResponseEntity.ok().build();
     }
-
     @PostMapping("/{id_usuario}")
     public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody Tarefas tarefa) {
         Long id_user = tarefa.getId_tarefa();
@@ -78,9 +72,5 @@ public class TarefasController {
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-       
     }
-
-
 }

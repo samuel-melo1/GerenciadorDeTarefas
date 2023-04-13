@@ -1,4 +1,4 @@
-package com.Tarefas.Gerenciador;
+package com.Tarefas.Gerenciador.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

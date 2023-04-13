@@ -6,8 +6,8 @@ $(document).ready(function(){
             descricao: $("#descricao").val(),
             data_inicio: $("#data_inicio").val(),
             prazo: $("#prazo").val(),
-            status:$("#status").val(),
-            prioridade: $("prioridade").val(),
+            prioridade:$("#prioridade").val(),
+            status:$("#status").val()
         }
         var localDateDataInicio = moment(data_inicio, 'YYYY-MM-DD').toObject();
         var localDatePrazo = moment(prazo, 'YYYY-MM-DD').toObject();
