@@ -14,6 +14,7 @@ import com.Tarefas.Gerenciador.dto.UsuariosDto;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.UsuariosService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -32,6 +33,7 @@ public class UsuariosController {
         List<Usuarios> usuarios = usuariosService.listarUsuarios();
         return ResponseEntity.ok().body(usuarios);
     }
+
     @GetMapping("/id")
     public ResponseEntity<Object> listarIdUsuario(@RequestBody @Valid UsuariosDto usuariosDto) {
         var usuarios = new Usuarios();
@@ -47,15 +49,17 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuarios usuarios, HttpSession session) {
-        boolean autenticado = usuariosService.autenticador(usuarios.getEmail(), usuarios.getSenha());
-        if (autenticado) {
-            session.setAttribute("usuarioLogado", usuarios);
+    public ResponseEntity<String> login(@RequestBody Usuarios usuarios, HttpServletRequest request) {
+        Usuarios usuarioAutenticado = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
+        if (usuarioAutenticado != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", usuarioAutenticado);
+            System.out.println(session.getAttribute("usuario"));
             return ResponseEntity.ok("User authenticated successfully");
+            
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
     }
-
 
 }

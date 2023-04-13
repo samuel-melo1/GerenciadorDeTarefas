@@ -29,9 +29,7 @@ public class TarefasService {
         if(tarefasRepository.existsByDescricao(tarefas.getDescricao())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Descrição já em uso");
         }
-
         return tarefasRepository.save(tarefas);
-        
     }
     public List<Tarefas> listarTarefas(){
         return tarefasRepository.findAll();
