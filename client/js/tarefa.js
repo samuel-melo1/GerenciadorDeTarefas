@@ -9,6 +9,9 @@ $(document).ready(function(){
             prioridade:$("#prioridade").val(),
             status:$("#status").val()
         }
+        var sessionId = '<%= session.getId() %>';
+        document.cookie = 'sessionId=' + sessionId;
+        
         var localDateDataInicio = moment(data_inicio, 'YYYY-MM-DD').toObject();
         var localDatePrazo = moment(prazo, 'YYYY-MM-DD').toObject();
         var dataInicioObj = new Date(localDateDataInicio.years, localDateDataInicio.months, localDateDataInicio.date);

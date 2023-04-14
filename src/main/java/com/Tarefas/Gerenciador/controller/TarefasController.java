@@ -17,6 +17,7 @@ import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.TarefasService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -28,21 +29,17 @@ public class TarefasController {
 
     TarefasController(TarefasService tarefasService) {
         this.tarefasService = tarefasService;
-
     }
 
     @PostMapping
-    public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto, HttpSession session) {
-        // Verifica se a sessão está ativa e se o usuário está logado
-        if (session != null && session.getAttribute("usuario") != null) {
-            var tarefas = new Tarefas();
-            BeanUtils.copyProperties(tarefasDto, tarefas);
-            Usuarios usuario = (Usuarios) session.getAttribute("usuario");
-            tarefas.setUsuario(usuario);
-            return ResponseEntity.status(HttpStatus.CREATED).body(tarefasService.criarTarefa(tarefas));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
-        }
+    public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto, HttpServletRequest request,
+            HttpSession session) {
+        var tarefas = new Tarefas();
+        BeanUtils.copyProperties(tarefasDto, tarefas);
+        Usuarios usuario = (Usuarios) session.getAttribute("usuario");
+        tarefas.setUsuario(usuario);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(tarefasService.criarTarefa(tarefas));
     }
 
     @GetMapping
