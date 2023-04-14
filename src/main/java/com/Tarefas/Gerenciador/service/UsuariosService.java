@@ -27,6 +27,10 @@ public class UsuariosService {
     public Optional<Usuarios> buscarUsuarios(Long id){
         return usuariosRepository.findById(id);
     }
+    public Usuarios buscarPorEmail(String email){
+        Optional<Usuarios> optionalUsuario = usuariosRepository.findByEmail(email);
+        return optionalUsuario.get();
+    }
 
     public Usuarios autenticarUsuario(String email, String senha) {
         Optional<Usuarios> optionalUsuario = usuariosRepository.findByEmailAndSenha(email, senha);

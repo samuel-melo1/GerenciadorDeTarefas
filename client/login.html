@@ -1,41 +1,43 @@
 <!DOCTYPE html>
+
 <head>
   <meta charset="UTF-8" />
   <title>Formulário de Login e Registro com HTML5 e CSS3</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/cadastroLogin.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="js/login.js"></script>
 </head>
+
 <body>
-  <div class="container" >
+  <div class="container">
     <a class="links" id="paracadastro"></a>
     <a class="links" id="paralogin"></a>
-     
-    <div class="content">      
+
+    <div class="content">
       <!--FORMULÁRIO DE LOGIN-->
       <div id="login">
-        <form id="form-login" method="post" action="/login"> 
-          <h1>Login</h1> 
-          <p> 
+        <form id="form-login" method="post" action="/login">
+          <h1>Login</h1>
+          <p>
             <label for="email">Seu email</label>
-            <input id="email" name="email" required="required" type="text" placeholder="ex. contato@htmlecsspro.com"/>
+            <input id="email" name="email" required="required" type="text" placeholder="ex. contato@htmlecsspro.com" />
           </p>
-           
-          <p> 
+
+          <p>
             <label for="senha">Sua senha</label>
-            <input id="senha" name="senha" required="required" type="password" placeholder="ex. senha" /> 
+            <input id="senha" name="senha" required="required" type="password" placeholder="ex. senha" />
           </p>
-           
-          <p> 
-            <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
+
+          <p>
+            <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
             <label for="manterlogado">Manter-me logado</label>
           </p>
-           
-          <p> 
-            <input type="submit" value="Logar" /> 
+
+          <p>
+            <input type="submit" value="Logar" />
           </p>
-           
+
           <p class="link">
             Ainda não tem conta?
             <a href="cadastro.html">Cadastre-se</a>
@@ -44,7 +46,7 @@
       </div>
 
     </div>
-  </div>  
+  </div>
 </body>
-</html>
 
+</html>

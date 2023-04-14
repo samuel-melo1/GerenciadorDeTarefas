@@ -5,6 +5,12 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +29,14 @@ import jakarta.validation.Valid;
 public class UsuariosController {
 
     private UsuariosService usuariosService;
+    private AuthenticationManager authenticationManager;
+    private UserDetailsService userDetailsService;
 
-    UsuariosController(UsuariosService usuariosService) {
+    UsuariosController(UsuariosService usuariosService, AuthenticationManager authenticationManager,
+            UserDetailsService userDetailsService) {
         this.usuariosService = usuariosService;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping
@@ -49,17 +60,15 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuarios usuarios, HttpServletRequest request, HttpSession session,
+    public ResponseEntity<String> login(@RequestBody Usuarios usuarios,HttpServletRequest request,HttpSession session,
             HttpServletResponse response) {
-        Usuarios usuarioAutenticado = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
-        if (usuarioAutenticado != null) {
-            session.setAttribute("usuario", usuarioAutenticado);
-            String sessionId = session.getId();
-            System.out.println(session.getAttribute("usuario") + sessionId);
-            return ResponseEntity.ok("User authenticated successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
+
+        Authentication authentication = authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(usuarios.getEmail(), usuarios.getSenha()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(usuarios.getEmail());
+        session.setAttribute("usuario", userDetails);
+
+        return ResponseEntity.ok("User authenticated successfully");
     }
 
 }
