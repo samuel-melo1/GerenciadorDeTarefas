@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
-import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.TarefasService;
-import com.Tarefas.Gerenciador.service.UsuariosService;
-import jakarta.servlet.http.HttpServletRequest;
+
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -28,22 +25,17 @@ import jakarta.validation.Valid;
 public class TarefasController {
 
     private TarefasService tarefasService;
-    private UsuariosService usuariosService;
 
-    TarefasController(TarefasService tarefasService, UsuariosService usuariosService) {
+
+    TarefasController(TarefasService tarefasService) {
         this.tarefasService = tarefasService;
-        this.usuariosService = usuariosService;
+        
     }
 
     @PostMapping
-    public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto, HttpServletRequest request,
-            Authentication authentication) {
+    public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefasDto, tarefas);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Usuarios usuario = usuariosService.buscarPorEmail(userDetails.getUsername());
-        tarefas.setUsuario(usuario);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(tarefasService.criarTarefa(tarefas));
     }
 

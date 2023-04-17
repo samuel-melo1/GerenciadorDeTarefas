@@ -1,4 +1,4 @@
-package com.Tarefas.Gerenciador.configs;
+package com.Tarefas.Gerenciador;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,5 +25,4 @@ public class Config implements WebMvcConfigurer {
               .allowedHeaders("*")
               .maxAge(3600);
   }
-  
 }
