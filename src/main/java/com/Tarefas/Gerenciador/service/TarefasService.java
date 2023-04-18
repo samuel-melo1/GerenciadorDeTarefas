@@ -21,15 +21,11 @@ public class TarefasService {
         this.usuariosRepository = usuariosRepository;
     }
 
-    public Object criarTarefa(Tarefas tarefas){
-        
-        if(tarefasRepository.existsByTitulo(tarefas.getTitulo())){
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Titulo já em uso");
-        }
-        if(tarefasRepository.existsByDescricao(tarefas.getDescricao())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Descrição já em uso");
-        }
+    public Tarefas criarTarefa(Tarefas tarefas){
         return tarefasRepository.save(tarefas);
+        
+   
+        
     }
     public List<Tarefas> listarTarefas(){
         return tarefasRepository.findAll();

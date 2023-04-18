@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.service.TarefasService;
-
-
 import jakarta.validation.Valid;
 
 @RestController
@@ -33,10 +31,11 @@ public class TarefasController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto) {
+    public ResponseEntity<Tarefas> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefasDto, tarefas);
         return ResponseEntity.status(HttpStatus.CREATED).body(tarefasService.criarTarefa(tarefas));
+     
     }
 
     @GetMapping
