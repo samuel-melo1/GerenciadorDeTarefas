@@ -34,36 +34,33 @@ public class TarefasController {
     public ResponseEntity<Tarefas> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefasDto, tarefas);
-        return ResponseEntity.status(HttpStatus.CREATED).body(tarefasService.criarTarefa(tarefas));
-     
+        Optional<Tarefas> tarefasOptional = tarefasService.criarTarefa(tarefas);
+        return ResponseEntity.status(HttpStatus.CREATED).body(tarefasOptional.get());
     }
 
     @GetMapping
     public ResponseEntity<List<Tarefas>> listarTarefas() {
-        List<Tarefas> tarefas = tarefasService.listarTarefas();
-        return ResponseEntity.ok().body(tarefas);
+       Optional<List<Tarefas>> tarefas = tarefasService.listarTarefas();
+        return ResponseEntity.ok().body(tarefas.get());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> buscarTarefa(@PathVariable Long id) {
+    public ResponseEntity<Tarefas> buscarTarefa(@PathVariable Long id) {
         Optional<Tarefas> tarefasOptional = tarefasService.buscarTarefas(id);
-        if (!tarefasOptional.isPresent()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não foi encontrada");
-        }
-        return ResponseEntity.ok().body(tarefasOptional);
+        return ResponseEntity.ok().body(tarefasOptional.get());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Tarefas> atualizarTarefa(@PathVariable Long id, @RequestBody @Valid TarefasDto tarefaDto) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefaDto, tarefas);
-        Tarefas tarefasAtual = tarefasService.atualizarTarefas(id, tarefas);
-        return ResponseEntity.ok().body(tarefasAtual);
+        Optional<Tarefas> tarefasAtual = tarefasService.atualizarTarefas(id, tarefas);
+        return ResponseEntity.ok().body(tarefasAtual.get());
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletarTarefa(@PathVariable Long id) {
+    public ResponseEntity<Tarefas> deletarTarefa(@PathVariable Long id) {
         tarefasService.excluirTarefas(id);
         return ResponseEntity.ok().build();
     }
@@ -72,8 +69,8 @@ public class TarefasController {
     public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody Tarefas tarefa) {
         Long id_user = tarefa.getId_tarefa();
         if (id_usuario.equals(id_user)) {
-            Tarefas novaTarefa = tarefasService.criarTarefaUsuario(tarefa, id_usuario);
-            return ResponseEntity.ok().body(novaTarefa);
+            Optional<Tarefas> novaTarefa = tarefasService.criarTarefaUsuario(tarefa, id_usuario);
+            return ResponseEntity.ok().body(novaTarefa.get());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
