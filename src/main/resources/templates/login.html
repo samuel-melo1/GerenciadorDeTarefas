@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulário de Login e Registro com HTML5 e CSS3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/cadastroLogin.css" th:href="@{/css/cadastroLogin.css}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../static/js/login.js" th:src="@{js/login.js}"></script> 
+</head>
+<body>
+    <div class="container">
+        <a class="links" id="paracadastro"></a>
+        <a class="links" id="paralogin"></a>
+        <div class="content">
+            <!--FORMULÁRIO DE LOGIN-->
+            <div id="login">
+                <form id="form-login" method="post" action="/login">
+                    <h1>Login</h1>
+                    <p>
+                        <label for="email">Seu email</label>
+                        <input id="email" name="email" required="required" type="text"
+                            placeholder="ex. contato@htmlecsspro.com" th:value="${tarefas.email}" />
+                    </p>
+                    <p>
+                        <label for="senha">Sua senha</label>
+                        <input id="senha" name="senha" required="required" type="password" placeholder="ex. senha" th:value="${tarefas.senha}" />
+                    </p>
+                    <p>
+                        <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
+                        <label for="manterlogado">Manter-me logado</label>
+                    </p>
+                    <p>
+                        <input type="submit" value="Logar" />
+                    </p>
+                    <p class="link">
+                        Ainda não tem conta?
+                        <a href="cadastro.html">Cadastre-se</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

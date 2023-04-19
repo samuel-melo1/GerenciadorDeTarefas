@@ -24,11 +24,11 @@ public class TarefasService {
     public Tarefas criarTarefa(Tarefas tarefas) {
         Optional<Tarefas> tarefaExistenteTitulo = tarefasRepository.existsByTitulo(tarefas.getTitulo());
         if (tarefaExistenteTitulo.isPresent()) {
-            System.out.println("CONFLICT: Título já em uso");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("CONFLICT: Titulo em uso");
         }
         Optional<Tarefas> tarefaExistenteDescricao = tarefasRepository.existsByDescricao(tarefas.getDescricao());
         if (tarefaExistenteDescricao.isPresent()) {
-            System.out.println("CONFLICT: Descrição já em uso");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("CONFILICT: Descrição já em uso");
         }
         return tarefasRepository.save(tarefas);
     }
@@ -64,7 +64,7 @@ public class TarefasService {
         Optional<Tarefas> tarefas = tarefasRepository.findById(id);
 
         if (!tarefas.isPresent()) {
-            System.out.println("Tarefa não encontrada");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe tarefa");
         }else{
             tarefasRepository.delete(tarefas.get());
         }
