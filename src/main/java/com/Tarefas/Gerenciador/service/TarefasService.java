@@ -21,31 +21,30 @@ public class TarefasService {
         this.usuariosRepository = usuariosRepository;
     }
 
-    public Optional<Tarefas> criarTarefa(Tarefas tarefas) {
+    public Tarefas criarTarefa(Tarefas tarefas) {
         Optional<Tarefas> tarefaExistenteTitulo = tarefasRepository.existsByTitulo(tarefas.getTitulo());
         if (tarefaExistenteTitulo.isPresent()) {
             System.out.println("CONFLICT: Título já em uso");
-            return Optional.empty();
         }
         Optional<Tarefas> tarefaExistenteDescricao = tarefasRepository.existsByDescricao(tarefas.getDescricao());
         if (tarefaExistenteDescricao.isPresent()) {
             System.out.println("CONFLICT: Descrição já em uso");
-            return Optional.empty();
         }
-        return Optional.of(tarefasRepository.save(tarefas));
+        return tarefasRepository.save(tarefas);
     }
 
-    public Optional <List<Tarefas>> listarTarefas() {
-        return Optional.of(tarefasRepository.findAll()); 
+    public List<Tarefas> listarTarefas() {
+        return tarefasRepository.findAll();
+        
+    }
+
+    public Tarefas buscarTarefa(Long id) {
+        Optional<Tarefas> tarefasOptional = tarefasRepository.findById(id);
+        return tarefasOptional.get();
 
     }
 
-    public Optional<Tarefas> buscarTarefas(Long id) {
-        return tarefasRepository.findById(id);
-
-    }
-
-    public Optional<Tarefas> atualizarTarefas(Long id, Tarefas tarefasAtualizada) {
+    public Tarefas atualizarTarefas(Long id, Tarefas tarefasAtualizada) {
         Optional<Tarefas> tarefasAntiga = tarefasRepository.findById(id);
 
         if (!tarefasAntiga.isPresent()) {
@@ -58,23 +57,24 @@ public class TarefasService {
         tarefas.setPrazo(tarefasAtualizada.getPrazo());
         tarefas.setStatus(tarefasAtualizada.getStatus());
         
-        return Optional.of(tarefasRepository.save(tarefas));
+        return tarefasRepository.save(tarefas);
     }
 
     public void excluirTarefas(Long id) {
         Optional<Tarefas> tarefas = tarefasRepository.findById(id);
 
         if (!tarefas.isPresent()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
+            System.out.println("Tarefa não encontrada");
+        }else{
+            tarefasRepository.delete(tarefas.get());
         }
-        tarefasRepository.delete(tarefas.get());
+        
     }
 
-    public Optional<Tarefas> criarTarefaUsuario(Tarefas tarefa, Long id_usuario) {
+    public Tarefas criarTarefaUsuario(Tarefas tarefa, Long id_usuario) {
         Usuarios usuario = usuariosRepository.findById(id_usuario)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         tarefa.setUsuario(usuario);
-       
-        return Optional.of(tarefasRepository.save(tarefa));
+        return tarefasRepository.save(tarefa);
     }
 }

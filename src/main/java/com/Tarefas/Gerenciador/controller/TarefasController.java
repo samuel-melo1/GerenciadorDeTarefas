@@ -1,7 +1,7 @@
 package com.Tarefas.Gerenciador.controller;
 
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,28 +34,25 @@ public class TarefasController {
     public ResponseEntity<Tarefas> criarTarefa(@RequestBody @Valid TarefasDto tarefasDto) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefasDto, tarefas);
-        Optional<Tarefas> tarefasOptional = tarefasService.criarTarefa(tarefas);
-        return ResponseEntity.status(HttpStatus.CREATED).body(tarefasOptional.get());
+        tarefasService.criarTarefa(tarefas);
+        return ResponseEntity.status(HttpStatus.CREATED).body(tarefas);
     }
 
     @GetMapping
     public ResponseEntity<List<Tarefas>> listarTarefas() {
-       Optional<List<Tarefas>> tarefas = tarefasService.listarTarefas();
-        return ResponseEntity.ok().body(tarefas.get());
+        return ResponseEntity.ok().body(tarefasService.listarTarefas());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Tarefas> buscarTarefa(@PathVariable Long id) {
-        Optional<Tarefas> tarefasOptional = tarefasService.buscarTarefas(id);
-        return ResponseEntity.ok().body(tarefasOptional.get());
+        return ResponseEntity.ok().body(tarefasService.buscarTarefa(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Tarefas> atualizarTarefa(@PathVariable Long id, @RequestBody @Valid TarefasDto tarefaDto) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefaDto, tarefas);
-        Optional<Tarefas> tarefasAtual = tarefasService.atualizarTarefas(id, tarefas);
-        return ResponseEntity.ok().body(tarefasAtual.get());
+        return ResponseEntity.ok().body(tarefasService.atualizarTarefas(id, tarefas));
 
     }
 
@@ -69,8 +66,7 @@ public class TarefasController {
     public ResponseEntity<Tarefas> criarTarefaUsuario(@PathVariable Long id_usuario, @RequestBody Tarefas tarefa) {
         Long id_user = tarefa.getId_tarefa();
         if (id_usuario.equals(id_user)) {
-            Optional<Tarefas> novaTarefa = tarefasService.criarTarefaUsuario(tarefa, id_usuario);
-            return ResponseEntity.ok().body(novaTarefa.get());
+            return ResponseEntity.ok().body(tarefasService.criarTarefaUsuario(tarefa, id_usuario));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
