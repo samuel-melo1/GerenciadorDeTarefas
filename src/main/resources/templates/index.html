@@ -6,30 +6,30 @@
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="../static/js/tarefa.js" th:src="@{js/tarefa.js}"></script> 
+    <script src="../static/js/tarefas.js" th:src="@{js/tarefas.js}" type="text/javascript"></script> 
   </head>
   <body>
     <h1>Gerenciador de Tarefas</h1>
-    <form id="cadastro_tarefa" method="post" action="">
+    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefas}">
       <div class="titulo">
         <label for="titulo">Titulo da Tarefa:</label>
-        <input type="text" id="titulo" name="titulo" th:value="${tarefas.titulo}">
+        <input type="text" id="titulo" th:field="*{titulo}" th:value="${tarefas.titulo}" >
       </div>
       <div class="descricao">
         <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" th:value="${tarefas.descricao}"></textarea>
+        <textarea id="descricao" th:field="*{descricao}" th:value="${tarefas.descricao}"></textarea>
       </div>
       <div class="data">
         <label for="data_inicio">Data de Inicio</label>
-        <input type="date" id="data_inicio" th:value="${tarefas.data_inicio}">
+        <input type="date" id="data_inicio" th:field="*{data_inicio}" th:value="${tarefas.data_inicio}">
       </div>
       <div class="prazo">
         <label for="prazo">Prazo</label>
-        <input type="date" id="prazo" th:value="${tarefas.prazo}" >
+        <input type="date" id="prazo" th:field="*{prazo}" th:value="${tarefas.prazo}" >
       </div>
       <div class="prioridade">
         <label for="prioridade">Prioridade:</label>
-        <select id="prioridade" name="prioridade" th:value="${tarefas.prioridade}">
+        <select id="prioridade" th:field="*{prioridade}" th:value="${tarefas.prioridade}">
           <option value="BAIXA">Baixa</option>
           <option value="MEDIA">Média</option>
           <option value="ALTA">Alta</option>
@@ -37,7 +37,7 @@
       </div>
       <div class="status">
         <label for="status">Status:</label>
-        <select id="status" name="status" th:value="${tarefas.status}">
+        <select id="status" th:field="*{status}" th:value="${tarefas.status}">
           <option value="Não iniciado">Não iniciado</option>
           <option value="Em Andamento">Em Andamento</option>
           <option value="Concluído">Concluído</option>
@@ -45,8 +45,8 @@
       </div>
       <p>
         <a href="login.html">
-          <input type="submit" value="Adicionar Tarefa">
-          <input id="btn-voltar" type="button" value="Voltar ao Login">
+          <input id="btn-adicionar-tarefa" type="submit" th:attr="data-url=@{/tarefas}" value="Adicionar Tarefa">
+          <input id="btn-voltar" th:onclick="" type="button" value="Voltar ao Login">
         </a>
       </p>
     </form>

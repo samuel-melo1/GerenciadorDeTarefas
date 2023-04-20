@@ -11,22 +11,22 @@
 </head>
 <body>
     <div id="cadastro">
-        <form id="form-cadastro" method="post" action=""> 
+        <form id="form-cadastro" method="post" action="" th:object="${usuarios}" > 
           <h1>Cadastro</h1> 
            
           <p> 
             <label for="nome">Seu nome</label>
-            <input id="nome" name="nome" required="required" type="text" placeholder="nome" th:value="${usuarios.nome}"/>
+            <input id="nome" th:field="*{nome}" required="required" type="text" placeholder="nome" th:value="${usuarios.nome}"/>
           </p>
 
           <p> 
             <label for="senha">Sua senha</label>
-            <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" th:value="${usuarios.senha}"/>
+            <input id="senha" th:field="*{senha}" required="required" type="password" placeholder="ex. 1234" th:value="${usuarios.senha}"/>
           </p>
            
           <p> 
             <label for="email">Seu e-mail</label>
-            <input id="email" name="email" required="required" type="email" placeholder="contato@htmlecsspro.com" th:value="${usuarios.email}"/> 
+            <input id="email" th:field="*{email}" required="required" type="email" placeholder="contato@htmlecsspro.com" th:value="${usuarios.email}"/> 
           </p>
            
           <p> 

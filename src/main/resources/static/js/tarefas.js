@@ -9,16 +9,14 @@ $(document).ready(function(){
             prioridade:$("#prioridade").val(),
             status:$("#status").val()
         }
-        var sessionId = '<%= session.getId() %>';
-        document.cookie = 'sessionId=' + sessionId;
-        
+
         var localDateDataInicio = moment(data_inicio, 'YYYY-MM-DD').toObject();
         var localDatePrazo = moment(prazo, 'YYYY-MM-DD').toObject();
         var dataInicioObj = new Date(localDateDataInicio.years, localDateDataInicio.months, localDateDataInicio.date);
         var prazoObj = new Date(localDatePrazo.years, localDatePrazo.months, localDatePrazo.date);
         
         $.ajax({
-            url: 'http://localhost:8080/tarefas',
+            url: $('#btn-adicionar-tarefa').attr('data-url'),
             type: 'POST',
             data: JSON.stringify(tarefas),
             contentType: "application/json",
@@ -34,4 +32,3 @@ $(document).ready(function(){
         });
     });
 });
-

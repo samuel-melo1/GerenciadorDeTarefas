@@ -16,16 +16,16 @@
         <div class="content">
             <!--FORMULÁRIO DE LOGIN-->
             <div id="login">
-                <form id="form-login" method="post" action="/login">
+                <form id="form-login" method="post" action="/login" th:object="${usuarios}" >
                     <h1>Login</h1>
                     <p>
                         <label for="email">Seu email</label>
-                        <input id="email" name="email" required="required" type="text"
+                        <input id="email" th:field="*{email}" required="required" type="text"
                             placeholder="ex. contato@htmlecsspro.com" th:value="${tarefas.email}" />
                     </p>
                     <p>
                         <label for="senha">Sua senha</label>
-                        <input id="senha" name="senha" required="required" type="password" placeholder="ex. senha" th:value="${tarefas.senha}" />
+                        <input id="senha" th:field="*{senha}" required="required" type="password" placeholder="ex. senha" th:value="${tarefas.senha}" />
                     </p>
                     <p>
                         <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
