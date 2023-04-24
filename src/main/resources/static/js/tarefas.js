@@ -16,7 +16,7 @@ $(document).ready(function(){
         var prazoObj = new Date(localDatePrazo.years, localDatePrazo.months, localDatePrazo.date);
         
         $.ajax({
-            url: $('#btn-adicionar-tarefa').attr('data-url'),
+            url: 'http://localhost:8080/tarefas',
             type: 'POST',
             data: JSON.stringify(tarefas),
             contentType: "application/json",
@@ -29,6 +29,6 @@ $(document).ready(function(){
                 console.log(error);
                 alert("tente novamente - erro")
             }
-        });
+        })
     });
 });
