@@ -10,26 +10,26 @@
   </head>
   <body>
     <h1>Gerenciador de Tarefas</h1>
-    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefas}">
+    <form id="cadastro_tarefa" method="post" th:action="@{/tarefas}" th:object="${tarefasDto}">
       <div class="titulo">
         <label for="titulo">Titulo da Tarefa:</label>
-        <input type="text" id="titulo" th:field="*{titulo}" th:value="${tarefas.titulo}" >
+        <input type="text" id="titulo" name="titulo" th:field="*{titulo}">
       </div>
       <div class="descricao">
         <label for="descricao">Descrição:</label>
-        <textarea id="descricao" th:field="*{descricao}" th:value="${tarefas.descricao}"></textarea>
+        <textarea id="descricao" name="descricao" th:field="*{descricao}"></textarea>
       </div>
       <div class="data">
         <label for="data_inicio">Data de Inicio</label>
-        <input type="date" id="data_inicio" th:field="*{data_inicio}" th:value="${tarefas.data_inicio}">
+        <input type="date" id="data_inicio" name="dataInicio" th:field="*{dataInicio}">
       </div>
       <div class="prazo">
         <label for="prazo">Prazo</label>
-        <input type="date" id="prazo" th:field="*{prazo}" th:value="${tarefas.prazo}" >
+        <input type="date" id="prazo" name="prazo" th:field="*{prazo}" >
       </div>
       <div class="prioridade">
         <label for="prioridade">Prioridade:</label>
-        <select id="prioridade" th:field="*{prioridade}" th:value="${tarefas.prioridade}">
+        <select id="prioridade" name="prioridade" th:field="*{prioridade}">
           <option value="BAIXA">Baixa</option>
           <option value="MEDIA">Média</option>
           <option value="ALTA">Alta</option>
@@ -37,7 +37,7 @@
       </div>
       <div class="status">
         <label for="status">Status:</label>
-        <select id="status" th:field="*{status}" th:value="${tarefas.status}">
+        <select id="status" name="status" th:field="*{status}">
           <option value="Não iniciado">Não iniciado</option>
           <option value="Em Andamento">Em Andamento</option>
           <option value="Concluído">Concluído</option>
@@ -50,5 +50,6 @@
         </a>
       </p>
     </form>
+
   </body>
 </html>

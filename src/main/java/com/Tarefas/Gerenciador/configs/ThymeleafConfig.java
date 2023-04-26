@@ -14,7 +14,7 @@ public class ThymeleafConfig {
     @Autowired
     private SpringResourceTemplateResolver templateResolver;
 
-    ThymeleafConfig(SpringResourceTemplateResolver templateResolver){
+    ThymeleafConfig(SpringResourceTemplateResolver templateResolver) {
         this.templateResolver = templateResolver;
     }
 

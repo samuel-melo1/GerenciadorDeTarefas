@@ -27,6 +27,6 @@ public class Usuarios  {
     private String email;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuarios")
     private List<Tarefas> tarefas;
 }

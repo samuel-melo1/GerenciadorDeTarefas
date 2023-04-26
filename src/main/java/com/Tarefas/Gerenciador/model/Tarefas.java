@@ -35,7 +35,7 @@ public class Tarefas implements Serializable {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Usuarios usuario;
+    private Usuarios usuarios;
 
 
 

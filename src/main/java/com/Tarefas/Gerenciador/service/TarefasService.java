@@ -74,7 +74,7 @@ public class TarefasService {
     public Tarefas criarTarefaUsuario(Tarefas tarefas, Long id_usuario) {
         Usuarios usuario = usuariosRepository.findById(id_usuario)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        tarefas.setUsuario(usuario);
+        tarefas.setUsuarios(usuario);
         return tarefasRepository.save(tarefas);
     }
 }
