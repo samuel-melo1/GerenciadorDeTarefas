@@ -1,5 +1,6 @@
-$(document).ready(function(){
-    $('#form-login').submit(function(e){
+/*
+$(document).ready(function () {
+    $('#form-login').submit(function (e) {
         e.preventDefault();
         var usuario = {
             senha: $("#senha").val(),
@@ -10,11 +11,11 @@ $(document).ready(function(){
             type: 'POST',
             data: JSON.stringify(usuario),
             contentType: "application/json",
-            success: function(response){
+            success: function (response) {
                 alert(' sucesso!');
                 window.location.href = "index.html";
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.log(xhr.responseText);
                 console.log(status);
                 console.log(error);
@@ -23,3 +24,4 @@ $(document).ready(function(){
         });
     });
 });
+*/

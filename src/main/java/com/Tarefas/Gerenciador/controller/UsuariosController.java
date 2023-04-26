@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.Tarefas.Gerenciador.configs.UserSession;
 import com.Tarefas.Gerenciador.dto.UsuariosDto;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.UsuariosService;
-
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @RestController
@@ -23,10 +21,13 @@ public class UsuariosController {
 
     private UsuariosService usuariosService;
 
-
     UsuariosController(UsuariosService usuariosService) {
         this.usuariosService = usuariosService;
-       
+    }
+
+    @GetMapping("/Paginalogin")
+    public String login() {
+        return "index";
     }
 
     @GetMapping
@@ -50,16 +51,11 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuarios usuarios, HttpServletResponse response) {
+    public ResponseEntity<String> loginUser(@RequestBody Usuarios usuarios, HttpSession session) {
         Usuarios usuariosSalvar = usuariosService.buscarPorEmail(usuarios.getEmail());
-        if(usuariosSalvar == null || !usuariosSalvar.getSenha().equals(usuarios.getSenha())){
+        if (usuariosSalvar == null || !usuariosSalvar.getSenha().equals(usuarios.getSenha())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.ok("User authenticated successfully");
     }
-    UserSession userSession = new UserSession();
-   
-    
-
-
 }

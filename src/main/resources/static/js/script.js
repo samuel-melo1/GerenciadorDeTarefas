@@ -1,3 +1,4 @@
+/*
 $(document).ready(function(){
     $('#form-cadastro').submit(function(e){
         e.preventDefault();
@@ -24,3 +25,4 @@ $(document).ready(function(){
         });
     });
 });
+*/  

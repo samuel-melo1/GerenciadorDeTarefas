@@ -1,3 +1,4 @@
+/*
 $(document).ready(function(){
     $('#cadastro_tarefa').submit(function(e){
         e.preventDefault();
@@ -32,3 +33,4 @@ $(document).ready(function(){
         })
     });
 });
+*/
