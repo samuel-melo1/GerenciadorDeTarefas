@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/cadastroLogin.css" th:href="@{/css/cadastroLogin.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="#">
    
 </head>
 <body>
@@ -16,16 +17,16 @@
         <div class="content">
             <!--FORMULÁRIO DE LOGIN-->
             <div id="login">
-                <form id="form-login" method="get" th:action="@{/login}" >
+                <form id="form-login" method="post" th:action="@{/login}" >
                     <h1>Login</h1>
                     <p>
                         <label for="email">Seu email</label>
-                        <input id="email" th:field="*{usuarios.email}" required="required" type="text"
-                            placeholder="ex. contato@htmlecsspro.com" th:value="${usuarios.email}" />
+                        <input id="email" required="required" type="text"
+                            placeholder="ex. contato@htmlecsspro.com" th:value="${email}" />
                     </p>
                     <p>
                         <label for="senha">Sua senha</label>
-                        <input id="senha" th:field="*{senha}" required="required" type="password" placeholder="ex. senha" th:value="${usuarios.senha}" />
+                        <input id="senha"  required="required" type="password" placeholder="ex. senha" th:value="${senha}" />
                     </p>
                     <p>
                         <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
@@ -38,7 +39,6 @@
                         Ainda não tem conta?
                         <a href="cadastro.html">Cadastre-se</a>
                     </p>
-                    <p th:if="${erro}" th:text="${erro}" style="color: red"></p>
                 </form>
             </div>
         </div>

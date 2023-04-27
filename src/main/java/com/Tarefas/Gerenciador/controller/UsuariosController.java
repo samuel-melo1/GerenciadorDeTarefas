@@ -21,9 +21,8 @@ public class UsuariosController {
         this.usuariosService = usuariosService;
     }
 
-    @GetMapping("/Paginalogin")
+    @GetMapping("/login")
     public String login(Model model, Usuarios usuarios) {
-        model.addAttribute("usuarios", new Usuarios());
         return "login";
         
     }
@@ -38,7 +37,7 @@ public class UsuariosController {
 
     @PostMapping("/login")
     public String loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session, Model model) {
-        Usuarios usuariosSalvar = usuariosService.buscarPorEmail(usuarios.getEmail());
+        Usuarios usuariosSalvar = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
         if (usuariosSalvar == null || !usuariosSalvar.getSenha().equals(usuarios.getSenha())) {
             model.addAttribute("erro", "Usuário ou senha inválido");
             return "login";
