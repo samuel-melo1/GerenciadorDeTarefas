@@ -2,6 +2,9 @@ package com.Tarefas.Gerenciador.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +30,9 @@ public class Tarefas implements Serializable {
 
     private String titulo;
     private String descricao; 
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDate data_inicio;
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDate prazo;
     private String status;
     private String prioridade;
