@@ -70,6 +70,14 @@
   input {
     outline: none;
   }
+
+  .alert-success {
+    color: green;
+    background-color: lightgreen;
+    border: 1px solid darkgreen;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
   
   input:not([type="checkbox"]){
     width: 95%;

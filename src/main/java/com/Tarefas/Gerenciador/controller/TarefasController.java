@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.service.TarefasService;
@@ -27,6 +29,12 @@ public class TarefasController {
     TarefasController(TarefasService tarefasService) {
         this.tarefasService = tarefasService;
 
+    }
+    @GetMapping("/tarefas")
+    public ModelAndView home(){
+        ModelAndView mv = new ModelAndView("index");
+        mv.addObject("tarefas", new Tarefas());
+        return mv;
     }
 
     @PostMapping("/tarefas")

@@ -6,9 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.Tarefas.Gerenciador.dto.UsuariosDto;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.UsuariosService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -22,17 +25,34 @@ public class UsuariosController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, Usuarios usuarios) {
-        return "login";
-        
+    public ModelAndView login() {
+        ModelAndView mv = new ModelAndView("login");
+        mv.addObject("usuarios", new Usuarios());
+        return mv;
+    }
+    @GetMapping("/cadastro")
+    public ModelAndView cadastro(){
+        ModelAndView mv = new ModelAndView("cadastro");
+        mv.addObject("usuarios", new Usuarios());
+        return mv;
     }
 
-    @PostMapping("/cadastrarUsuarios")
-    public String criarUsuario(Model model, @Valid UsuariosDto usuariosDto) {
-        var usuarios = new Usuarios();
-        BeanUtils.copyProperties(usuariosDto, usuarios);
-        model.addAttribute("usuarios", usuarios);
-        return "cadastro";
+    @PostMapping("/cadastro")
+    public ModelAndView cadastrar(@ModelAttribute("usuarios") Usuarios usuarios, HttpServletRequest request ){
+        String nome = request.getParameter("nome");
+        String senha = request.getParameter("senha");
+        String email = request.getParameter("email");
+
+        Usuarios usuario = new Usuarios();
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
+        usuario.setEmail(email);
+
+        Usuarios usuarioSalvo = usuariosService.salvar(usuarios);
+        ModelAndView mv = new ModelAndView("redirect:/login");
+        mv.addObject("sucesso", "Usuário criado com sucesso" );
+        return mv;
+
     }
 
     @PostMapping("/login")
