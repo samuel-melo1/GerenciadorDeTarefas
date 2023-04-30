@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.service.TarefasService;
-
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -31,14 +29,14 @@ public class TarefasController {
 
     }
     @GetMapping("/tarefas")
-    public ModelAndView home(){
+    public ModelAndView tarefasView(){
         ModelAndView mv = new ModelAndView("index");
         mv.addObject("tarefas", new Tarefas());
         return mv;
     }
 
     @PostMapping("/tarefas")
-    public String criarTarefa(@ModelAttribute("tarefas") @Valid TarefasDto tarefasDto, HttpSession session,
+    public String criarTarefa(@ModelAttribute("tarefasDto") @Valid TarefasDto tarefasDto, HttpSession session,
             Model model) {
         var tarefas = new Tarefas();
         BeanUtils.copyProperties(tarefasDto, tarefas);

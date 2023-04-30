@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8">
-    <title>Gerenciador de Tarefas</title>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <link rel="shortcut icon" href="#">
-  </head>
-  <body>
-    <h1>Gerenciador de Tarefas</h1>
-    <form id="cadastro_tarefa" method="post" th:action="/tarefas" th:object="${tarefasDto}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="shortcut icon" href="#">
+  <title>Gerenciador de Tarefas</title>
+</head>
+
+<body>
+  <h1>Gerenciador de Tarefas</h1>
+  <div id="index">
+    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefasDto}">
       <div class="titulo">
         <label for="titulo">Titulo da Tarefa:</label>
-        <input type="text" id="titulo" name="titulo">
+        <input type="text" id="titulo" name="titulo" required="required" placeholder="titulo"  th:value="${titulo}">
       </div>
       <div class="descricao">
         <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao"></textarea>
+        <textarea id="descricao" name="descricao" required="required" placeholder="descricao"  th:value="${descricao}"> </textarea>
       </div>
       <div class="data">
         <label for="data_inicio">Data de Inicio</label>
-        <input type="date" id="data_inicio" name="dataInicio" >
+        <input type="date" id="data_inicio" name="dataInicio">
       </div>
       <div class="prazo">
         <label for="prazo">Prazo</label>
-        <input type="date" id="prazo" name="prazo"  >
+        <input type="date" id="prazo" name="prazo">
       </div>
       <div class="prioridade">
         <label for="prioridade">Prioridade:</label>
-        <select id="prioridade" name="prioridade">
+        <select id="prioridade" name="prioridade" required="required"   th:value="${prioridade}">
           <option value="BAIXA">Baixa</option>
           <option value="MEDIA">Média</option>
           <option value="ALTA">Alta</option>
@@ -37,7 +41,7 @@
       </div>
       <div class="status">
         <label for="status">Status:</label>
-        <select id="status" name="status" >
+        <select id="status" name="status" required="required" th:value="${status}">
           <option value="Não iniciado">Não iniciado</option>
           <option value="Em Andamento">Em Andamento</option>
           <option value="Concluído">Concluído</option>
@@ -45,11 +49,12 @@
       </div>
       <p>
         <a href="login.html" th:href="@{login}">
-          <input type="submit"  value="Adicionar Tarefa">
+          <input type="submit" value="Adicionar Tarefa">
           <input type="button" value="Voltar ao Login">
         </a>
       </p>
     </form>
+  </div>
+</body>
 
-  </body>
 </html>

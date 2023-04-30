@@ -1,5 +1,4 @@
 package com.Tarefas.Gerenciador.controller;
-
 //import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,10 +51,10 @@ public class UsuariosController {
             HttpServletRequest request) {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        usuarios.setEmail(email);
+        usuarios.setEmail(email);  
         usuarios.setSenha(senha);
         Usuarios usuarioSalvo = usuariosService.autenticarUsuario(email, senha);
-        ModelAndView mv = new ModelAndView("redirect:/index");
+        ModelAndView mv = new ModelAndView("redirect:/tarefas");
         mv.addObject("Logado", "Usuário logado ");
         return mv;
     }
