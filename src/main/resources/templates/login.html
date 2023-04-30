@@ -3,12 +3,11 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Formulário de Login e Registro com HTML5 e CSS3</title>
+    <title> Login </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/cadastroLogin.css" th:href="@{/css/cadastroLogin.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="#">
-
 </head>
 
 <body>
@@ -18,16 +17,16 @@
         <div class="content">
             <!--FORMULÁRIO DE LOGIN-->
             <div id="login">
-                <form id="form-login" method="post" action="/login" th:object="${usuarios}">
+                <form id="form-login" method="post" action="" th:object="${usuarios}">
                     <h1>Login</h1>
                     <p>
                         <label for="email">Seu email</label>
-                        <input id="email" required="required" type="text" placeholder="ex. contato@htmlecsspro.com"
-                            th:value="${email}" />
+                        <input id="email" name="email" required="required" type="text"
+                            placeholder="ex. contato@htmlecsspro.com" th:value="${email}" />
                     </p>
                     <p>
                         <label for="senha">Sua senha</label>
-                        <input id="senha" required="required" type="password" placeholder="ex. senha"
+                        <input id="senha" name="senha" required="required" type="password" placeholder="ex. senha"
                             th:value="${senha}" />
                     </p>
                     <p>

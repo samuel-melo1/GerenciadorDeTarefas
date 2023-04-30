@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.Tarefas.Gerenciador.exceções.LoginInvalidoException;
 //import com.Tarefas.Gerenciador.dto.UsuariosDto;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.UsuariosService;
@@ -50,31 +48,15 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session, HttpServletRequest request) {
+    public ModelAndView loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session,
+            HttpServletRequest request) {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-
-        try {
-            Usuarios usuarioLogado = usuariosService.autenticarUsuario(email, senha);
-            session.setAttribute("usuarioLogado", usuarioLogado);
-            return new ModelAndView("redirect:/index");
-        } catch (LoginInvalidoException e) {
-            ModelAndView mv = new ModelAndView("login");
-            mv.addObject("mensagem", "Email ou senha inválidos");
-            return mv;
-        }
+        usuarios.setEmail(email);
+        usuarios.setSenha(senha);
+        Usuarios usuarioSalvo = usuariosService.autenticarUsuario(email, senha);
+        ModelAndView mv = new ModelAndView("redirect:/index");
+        mv.addObject("Logado", "Usuário logado ");
+        return mv;
     }
-
-    /*
-     @PostMapping("/login")
-      public String loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session, Model model) {
-     Usuarios usuariosSalvar = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
-     * if (usuariosSalvar == null || !usuariosSalvar.getSenha().equals(usuarios.getSenha())) {
-     model.addAttribute("erro", "Usuário ou senha inválido");
-      return "login";
-     }
-      session.setAttribute("usuarioLogado", usuariosSalvar);
-      return "redirect:/index";
-      }
-     */
 }

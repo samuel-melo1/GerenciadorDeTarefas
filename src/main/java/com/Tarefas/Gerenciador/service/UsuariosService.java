@@ -39,12 +39,16 @@ public class UsuariosService {
     }
 
     public Usuarios autenticarUsuario(String email, String senha) {
-        Optional<Usuarios> optionalUsuario = usuariosRepository.findByEmailAndSenha(email, senha);
-        Usuarios user = optionalUsuario.get();
-        Usuarios usuarios = new Usuarios();
-        if(!user.getSenha().equals(usuarios.getSenha()) || user == null){
-            throw new LoginInvalidoException("Email ou senha invalidos");
+        Optional<Usuarios>  usuariosOptional= usuariosRepository.findByEmailAndSenha(email, senha);
+        if(usuariosOptional.isPresent()){
+           Usuarios user = usuariosOptional.get();
+           if(!user.getSenha().equals(senha) && user.getEmail().equals(email)){
+            throw new LoginInvalidoException("email ou senha invalidos");
+           }
+           return user;
+        }else{
+            throw new NotFoundException("email e senha não encontrados");
         }
-        return user;
+        
     }
 }

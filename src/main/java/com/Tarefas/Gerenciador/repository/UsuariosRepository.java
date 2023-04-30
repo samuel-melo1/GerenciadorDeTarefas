@@ -7,8 +7,6 @@ import com.Tarefas.Gerenciador.model.Usuarios;
 
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
-
     Optional<Usuarios> findByEmail(String email);
     Optional<Usuarios> findByEmailAndSenha(String email, String senha);
-    
 }
