@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.Tarefas.Gerenciador.exceções.NotFoundException;
+import com.Tarefas.Gerenciador.exceções.LoginInvalidoException;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.repository.UsuariosRepository;
 
@@ -39,9 +40,11 @@ public class UsuariosService {
 
     public Usuarios autenticarUsuario(String email, String senha) {
         Optional<Usuarios> optionalUsuario = usuariosRepository.findByEmailAndSenha(email, senha);
-        if (!optionalUsuario.isPresent()) {
-            throw new NotFoundException("Email ou senha não encontrado");
+        Usuarios user = optionalUsuario.get();
+        Usuarios usuarios = new Usuarios();
+        if(!user.getSenha().equals(usuarios.getSenha()) || user == null){
+            throw new LoginInvalidoException("Email ou senha invalidos");
         }
-        return optionalUsuario.get();
+        return user;
     }
 }
