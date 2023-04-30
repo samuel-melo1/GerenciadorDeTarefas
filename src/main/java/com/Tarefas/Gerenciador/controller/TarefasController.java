@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.service.TarefasService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -34,7 +34,19 @@ public class TarefasController {
         mv.addObject("tarefas", new Tarefas());
         return mv;
     }
+    @PostMapping("/tarefas")
+    public ModelAndView criarTarefa(@ModelAttribute("tarefasDto") @Valid TarefasDto tarefasDto, HttpSession session, HttpServletRequest request){
+        tarefasDto.setTitulo(request.getParameter("titulo"));
+        tarefasDto.setDescricao(request.getParameter("descricao"));
+        tarefasDto.setPrioridade(request.getParameter("prioridade"));
+        tarefasDto.setStatus(request.getParameter("status"));
 
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
+
+    /* 
     @PostMapping("/tarefas")
     public String criarTarefa(@ModelAttribute("tarefasDto") @Valid TarefasDto tarefasDto, HttpSession session,
             Model model) {
@@ -45,6 +57,7 @@ public class TarefasController {
         model.addAttribute("listaTarefas", listaTarefas);
         return "index";
     }
+    */
 
     @GetMapping
     public ResponseEntity<List<Tarefas>> listarTarefas() {

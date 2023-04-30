@@ -1,6 +1,9 @@
 package com.Tarefas.Gerenciador.dto;
 
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,6 +23,7 @@ public class TarefasDto {
     @Size(min = 5, max = 20)
     private String descricao;
     @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate data_inicio; 
     @NotNull  
     private LocalDate prazo;

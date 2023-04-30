@@ -49,11 +49,10 @@ public class UsuariosController {
     @PostMapping("/login")
     public ModelAndView loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session,
             HttpServletRequest request) {
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        usuarios.setEmail(email);  
-        usuarios.setSenha(senha);
-        Usuarios usuarioSalvo = usuariosService.autenticarUsuario(email, senha);
+        usuarios.setEmail(request.getParameter("email"));  
+        usuarios.setSenha( request.getParameter("senha")); 
+        Usuarios usuarioSalvo = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
+        usuarioSalvo.getId_usuario();    
         ModelAndView mv = new ModelAndView("redirect:/tarefas");
         mv.addObject("Logado", "Usuário logado ");
         return mv;
