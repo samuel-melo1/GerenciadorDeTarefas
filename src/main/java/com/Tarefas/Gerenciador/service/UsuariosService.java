@@ -26,8 +26,9 @@ public class UsuariosService {
         return usuariosRepository.save(usuario);
     }
 
-    public Optional<Usuarios> buscarUsuarios(Long id) {
-        return usuariosRepository.findById(id);
+    public Usuarios buscarUsuarios(Long id) {
+        Optional<Usuarios> optionalUser = usuariosRepository.findById(id);
+        return optionalUser.get();
     }
 
     public Usuarios buscarPorEmail(String email) {
@@ -39,16 +40,16 @@ public class UsuariosService {
     }
 
     public Usuarios autenticarUsuario(String email, String senha) {
-        Optional<Usuarios>  usuariosOptional= usuariosRepository.findByEmailAndSenha(email, senha);
-        if(usuariosOptional.isPresent()){
-           Usuarios user = usuariosOptional.get();
-           if(!user.getSenha().equals(senha) && user.getEmail().equals(email)){
-            throw new LoginInvalidoException("email ou senha invalidos");
-           }
-           return user;
-        }else{
+        Optional<Usuarios> usuariosOptional = usuariosRepository.findByEmailAndSenha(email, senha);
+        if (usuariosOptional.isPresent()) {
+            Usuarios user = usuariosOptional.get();
+            if (!user.getSenha().equals(senha) && user.getEmail().equals(email)) {
+                throw new LoginInvalidoException("email ou senha invalidos");
+            }
+            return user;
+        } else {
             throw new NotFoundException("email e senha não encontrados");
         }
-        
+
     }
 }

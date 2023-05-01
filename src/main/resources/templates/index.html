@@ -14,26 +14,28 @@
 <body>
   <h1>Gerenciador de Tarefas</h1>
   <div id="index">
-    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefasDto}">
+    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefas}">
       <div class="titulo">
         <label for="titulo">Titulo da Tarefa:</label>
-        <input type="text" id="titulo" name="titulo" required="required" placeholder="titulo"  th:value="${titulo}">
+        <input type="text" id="titulo" name="titulo" required="required" placeholder="titulo" th:value="${titulo}">
       </div>
       <div class="descricao">
         <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" required="required" placeholder="descricao"  th:value="${descricao}"> </textarea>
+        <textarea id="descricao" name="descricao" required="required" placeholder="descricao"
+          th:value="${descricao}"> </textarea>
       </div>
-      <div class="data">
+      <div class="data_inicio">
         <label for="data_inicio">Data de Inicio</label>
-        <input type="date" id="data_inicio" name="data_inicio">
+        <input type="date" id="data_inicio" name="data_inicio" th:value="${data_inicio}">
       </div>
       <div class="prazo">
         <label for="prazo">Prazo</label>
-        <input type="date" id="prazo" name="prazo">
+        <input type="date" id="prazo" name="prazo" th:value="${prazo}">
       </div>
+
       <div class="prioridade">
         <label for="prioridade">Prioridade:</label>
-        <select id="prioridade" name="prioridade" required="required"   th:value="${prioridade}">
+        <select id="prioridade" name="prioridade" required="required" th:value="${prioridade}">
           <option value="BAIXA">Baixa</option>
           <option value="MEDIA">Média</option>
           <option value="ALTA">Alta</option>

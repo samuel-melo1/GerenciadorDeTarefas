@@ -2,9 +2,7 @@ package com.Tarefas.Gerenciador.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Tarefas implements Serializable {
     private static final long serialVersionUID = 1L;
     

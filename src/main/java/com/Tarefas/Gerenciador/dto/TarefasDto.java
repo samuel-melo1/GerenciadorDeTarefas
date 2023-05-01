@@ -23,9 +23,10 @@ public class TarefasDto {
     @Size(min = 5, max = 20)
     private String descricao;
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data_inicio; 
     @NotNull  
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate prazo;
     @NotBlank
     private String status;
