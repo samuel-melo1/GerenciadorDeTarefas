@@ -14,7 +14,7 @@
 <body>
   <h1>Gerenciador de Tarefas</h1>
   <div id="index">
-    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefas}">
+    <form id="cadastro_tarefa" method="post" action="" th:object="${tarefasDto}">
       <div class="titulo">
         <label for="titulo">Titulo da Tarefa:</label>
         <input type="text" id="titulo" name="titulo" required="required" placeholder="titulo" th:value="${titulo}">

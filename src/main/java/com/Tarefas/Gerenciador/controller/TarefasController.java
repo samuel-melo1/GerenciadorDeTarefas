@@ -20,7 +20,6 @@ import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.TarefasService;
 import com.Tarefas.Gerenciador.service.UsuariosService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -44,8 +43,9 @@ public class TarefasController {
         return mv;
     }
 
-    @PostMapping("/tarefas") 
-    public ModelAndView criarTarefa(@ModelAttribute("tarefasDto") @Valid TarefasDto tarefasDto, @RequestParam("data_inicio") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataInicio,
+    @PostMapping("/tarefas")
+    public ModelAndView criarTarefa(@ModelAttribute("tarefasDto") @Valid TarefasDto tarefasDto, 
+            @RequestParam("data_inicio") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataInicio,
             @RequestParam("prazo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate prazo,
             HttpSession session, HttpServletRequest request) {
         tarefasDto.setData_inicio(dataInicio);
@@ -54,16 +54,15 @@ public class TarefasController {
         tarefasDto.setDescricao(request.getParameter("descricao"));
         tarefasDto.setPrioridade(request.getParameter("prioridade"));
         tarefasDto.setStatus(request.getParameter("status"));
-        
         var tarefas = new Tarefas();
+        Usuarios usuario = new Usuarios();
         BeanUtils.copyProperties(tarefasDto, tarefas);
         Long id_usuario = (Long) session.getAttribute("id_usuario");
-        Usuarios usuario = usuariosService.buscarUsuarios(id_usuario);
+        usuario.setId_usuario(id_usuario);
         tarefas.setUsuarios(usuario);
-
+        
         ModelAndView mv = new ModelAndView("index");
-        tarefasService.criarTarefa(tarefas);       
-        System.out.println(tarefas); 
+        tarefasService.criarTarefa(tarefas);
         return mv;
     }
 
