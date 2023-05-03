@@ -44,17 +44,19 @@ public class TarefasController {
         return mv;
     }
 
-    @PostMapping("/tarefas") // recursão infinita (usar dto)
-    public ModelAndView criarTarefa(@ModelAttribute("tarefas") Tarefas tarefas, @RequestParam("data_inicio") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataInicio,
+    @PostMapping("/tarefas") 
+    public ModelAndView criarTarefa(@ModelAttribute("tarefasDto") @Valid TarefasDto tarefasDto, @RequestParam("data_inicio") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataInicio,
             @RequestParam("prazo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate prazo,
             HttpSession session, HttpServletRequest request) {
-        tarefas.setData_inicio(dataInicio);
-        tarefas.setPrazo(prazo);
-        tarefas.setTitulo(request.getParameter("titulo"));
-        tarefas.setDescricao(request.getParameter("descricao"));
-        tarefas.setPrioridade(request.getParameter("prioridade"));
-        tarefas.setStatus(request.getParameter("status"));
+        tarefasDto.setData_inicio(dataInicio);
+        tarefasDto.setPrazo(prazo);
+        tarefasDto.setTitulo(request.getParameter("titulo"));
+        tarefasDto.setDescricao(request.getParameter("descricao"));
+        tarefasDto.setPrioridade(request.getParameter("prioridade"));
+        tarefasDto.setStatus(request.getParameter("status"));
         
+        var tarefas = new Tarefas();
+        BeanUtils.copyProperties(tarefasDto, tarefas);
         Long id_usuario = (Long) session.getAttribute("id_usuario");
         Usuarios usuario = usuariosService.buscarUsuarios(id_usuario);
         tarefas.setUsuarios(usuario);

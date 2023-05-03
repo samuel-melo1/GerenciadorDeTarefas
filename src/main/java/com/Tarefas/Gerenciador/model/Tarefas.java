@@ -3,7 +3,8 @@ package com.Tarefas.Gerenciador.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,9 +37,10 @@ public class Tarefas implements Serializable {
     private String status;
     private String prioridade;
     
-    @JsonBackReference
+    
     @ManyToOne
     @JoinColumn(name = "id_usuario")
+    @JsonIgnore
     private Usuarios usuarios;
 
 
