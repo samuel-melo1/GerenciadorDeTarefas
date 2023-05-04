@@ -77,4 +77,8 @@ public class TarefasService {
         tarefas.setUsuarios(usuario);
         return tarefasRepository.save(tarefas);
     }
+
+    public List<Tarefas> listarTarefasUsuarios(Long id){
+        return tarefasRepository.findByUsuarios(id);
+    }
 }

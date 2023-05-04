@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Tarefas</title>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+  <h1>Minhas Tarefas</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Titulo</th>
+        <th>Descrição</th>
+        <th>Data de Inicio</th>
+        <th>Prazo</th>
+        <th>Prioridade</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="tarefa : ${tarefas}">
+        <td th:text="${tarefa.id_tarefa}"></td>
+        <td th:text="${tarefa.titulo}"></td>
+        <td th:text="${tarefa.descricao}"></td>
+        <td th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')}"></td>
+        <td th:text="${#dates.format(tarefa.prazo, 'dd/MM/yyyy')}"></td>
+        <td th:text="${tarefa.prioridade}"></td>
+        <td th:text="${tarefa.status}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <a href="adicionarTarefa.html" th:href="@{adicionarTarefa}">
+      <input type="button" value="Adicionar Tarefa">
+    </a>
+    <a href="logout.html" th:href="@{logout}">
+      <input type="button" value="Sair">
+    </a>
+  </div>
+</body>
+</html>

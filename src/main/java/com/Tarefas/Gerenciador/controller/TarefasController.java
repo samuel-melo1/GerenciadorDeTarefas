@@ -19,7 +19,6 @@ import com.Tarefas.Gerenciador.dto.TarefasDto;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.TarefasService;
-import com.Tarefas.Gerenciador.service.UsuariosService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -28,11 +27,10 @@ import jakarta.validation.Valid;
 public class TarefasController {
 
     private TarefasService tarefasService;
-    private UsuariosService usuariosService;
 
-    TarefasController(TarefasService tarefasService, UsuariosService usuariosService) {
+
+    TarefasController(TarefasService tarefasService) {
         this.tarefasService = tarefasService;
-        this.usuariosService = usuariosService;
 
     }
 
