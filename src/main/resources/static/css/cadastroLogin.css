@@ -46,9 +46,7 @@ input[type="password"] {
 
 input[type="checkbox"] {
   display: inline-block;
-  width: 55%;
-  vertical-align: middle;
-  margin-top: 20px 0 0 ;
+  width: 4%;
 }
 
 input[type="submit"] {
@@ -77,6 +75,10 @@ input[type="submit"]:hover {
   text-decoration: none;
   font-weight: bold;
 }
+p.link a{
+  border: 1px solid #ccc;
+  padding: 6px;
+}
 
 .link a:hover {
   text-decoration: underline;
@@ -84,7 +86,8 @@ input[type="submit"]:hover {
 
 /* estilo do checkbox */
 .checkbox {
-  display: block;
-  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+ 
 }
 
