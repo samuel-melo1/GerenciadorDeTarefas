@@ -1,70 +1,97 @@
 body {
-    background-color: #F0F0F0;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    font-size: 2em;
-    color: #333;
-    text-align: center;
-  }
-  
-  form {
-    width: 50%;
-    margin: 0 auto;
-    background-color: #FFF;
-    padding: 20px;
-    border: 1px solid #DDD;
-    border-radius: 5px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  input[type="text"], textarea, select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #CCC;
-    border-radius: 3px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
-  
-  input[type="submit"] {
-    background-color: #3498db;
-    border: none;
-    color: #FFF;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  input[type="button"] {
-    background-color:darkgoldenrod;
-    border: none;
-    color: #FFF;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 0 15px
-  
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #2980b9;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #666;
+  margin: 0;
+}
 
-  input[type="date"], select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #CCC;
-    border-radius: 3px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
- 
-  
+h1 {
+  text-align: center;
+  color: #ccc;
+  margin-top: 40px;
+}
+
+form {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #333;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* estilo dos campos */
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+input[type="text"],
+textarea {
+  display: block;
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background-color: #ccc;
+  color: #333;
+}
+
+select {
+  display: block;
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background-color: #ccc;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23fff' d='M3.5 5.5L8 10l4.5-4.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+input[type="date"] {
+  display: block;
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background-color: #ccc;
+  color: #333;
+}
+
+/* estilo dos botões */
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+input[type="submit"],
+input[type="button"] {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: #3e8e41;
+}
