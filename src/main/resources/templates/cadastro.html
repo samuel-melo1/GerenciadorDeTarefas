@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <title> Cadastro </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../static/css/cadastroLogin.css" th:href="@{/css/cadastroLogin.css}" rel="stylesheet" />
+    <link href="../static/css/cadastrar.css" th:href="@{/css/cadastrar.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="#">
-    <title>Cadastro Usuario</title>
 </head>
+
 <body>
-    <div id="cadastro">
-        <form id="form-cadastro" method="post" action="" th:object="${usuarios}" > 
-          <h1>Cadastro</h1> 
-           
-          <p> 
-            <label for="nome">Seu nome</label>
-            <input id="nome" name="nome" required="required" type="text" placeholder="nome" th:value="${nome}"/>
-          </p>
+    <div class="container">
+        <a class="links" id="paracadastro"></a>
+        <a class="links" id="paralogin"></a>
+        <div class="content">
+            <!--FORMULÁRIO DE LOGIN-->
+            <div id="cadastro">
+                <form id="form-cadastro" method="post" action="" th:object="${usuarios}">
+                    <h1>Cadastrar Usuário</h1>
+                    <p>
+                        <label for="nome">Seu nome</label>
+                        <input id="nome" name="nome" required="required" type="text"
+                            placeholder="nome" th:value="${nome}" />
+                    </p>
+                    <p>
+                        <label for="senha">Sua senha</label>
+                        <input id="senha" name="senha" required="required" type="password" placeholder="ex. senha"
+                            th:value="${senha}" />
+                    </p>
 
-          <p> 
-            <label for="senha">Sua senha</label>
-            <input id="senha" name="senha" required="required" type="password" placeholder="ex. 1234" th:value="${senha}"/>
-          </p>
-           
-          <p> 
-            <label for="email">Seu e-mail</label>
-            <input id="email" name="email" required="required" type="email" placeholder="contato@htmlecsspro.com" th:value="${email}"/> 
-          </p>
-           
-          <p> 
-            <input type="submit" value="Cadastrar"/> 
-          </p>
-
-          <p class="link">  
-            Já tem conta?
-            <a href="login.html" th:href="@{login}"> Ir para Login </a>
-          </p>
-        </form>    
-      </div>
-    
+                    <p>
+                      <label for="email">Sua email</label>
+                      <input id="email" name="email" required="required" type="text" placeholder="ex. contato@htmlcsspro.com"
+                          th:value="${senha}" />
+                  </p>
+                        <input type="submit" value="Cadastrar" />
+                    </p>
+                    <p class="link">
+                        Já tem conta?
+                        <a href="login.html" th:href="@{login}">Ir para Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
