@@ -51,7 +51,6 @@ public class UsuariosController {
         usuarios.setSenha( request.getParameter("senha")); 
         Usuarios usuarioSalvo = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
         ModelAndView mv = new ModelAndView("redirect:/tarefas");
-        mv.addObject("Logado", "Usuário logado ");
         session.setAttribute("id_usuario", usuarioSalvo.getId_usuario());
         System.out.println(session.getAttribute("id_usuario"));
         return mv;

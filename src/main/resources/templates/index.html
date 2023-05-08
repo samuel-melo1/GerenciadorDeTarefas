@@ -8,6 +8,7 @@
   <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="shortcut icon" href="#">
+  <link rel="icon" href="data:,">
   <title>Gerenciador de Tarefas</title>
 </head>
 
@@ -17,11 +18,11 @@
     <form id="cadastro_tarefa" method="post" action="" th:object="${tarefasDto}">
       <div class="titulo">
         <label for="titulo">Titulo da Tarefa:</label>
-        <input type="text" id="titulo" name="titulo" required="required" placeholder="titulo" th:value="${titulo}">
+        <input type="text" id="titulo" name="titulo"  placeholder="titulo" th:value="${titulo}">
       </div>
       <div class="descricao">
         <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" required="required" placeholder="descricao"
+        <textarea id="descricao" name="descricao"  placeholder="descricao"
           th:value="${descricao}"> </textarea>
       </div>
       <div class="data_inicio">
@@ -35,7 +36,7 @@
 
       <div class="prioridade">
         <label for="prioridade">Prioridade:</label>
-        <select id="prioridade" name="prioridade" required="required" th:value="${prioridade}">
+        <select id="prioridade" name="prioridade"  th:value="${prioridade}">
           <option value="BAIXA">Baixa</option>
           <option value="MEDIA">Média</option>
           <option value="ALTA">Alta</option>
@@ -43,7 +44,7 @@
       </div>
       <div class="status">
         <label for="status">Status:</label>
-        <select id="status" name="status" required="required" th:value="${status}">
+        <select id="status" name="status"  th:value="${status}">
           <option value="Não iniciado">Não iniciado</option>
           <option value="Em Andamento">Em Andamento</option>
           <option value="Concluído">Concluído</option>

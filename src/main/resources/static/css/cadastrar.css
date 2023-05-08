@@ -44,10 +44,6 @@ body {
     color: #333;
   }
   
-  input[type="checkbox"] {
-    display: inline-block;
-    width: 4%;
-  }
   
   input[type="submit"] {
     display: inline-block;
@@ -84,11 +80,6 @@ body {
     text-decoration: underline;
   }
   
-  /* estilo do checkbox */
-  .checkbox {
-    color: #fff;
-    text-decoration: none;
-   
-  }
+ 
   
   

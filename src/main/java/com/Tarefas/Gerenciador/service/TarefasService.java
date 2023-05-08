@@ -79,6 +79,7 @@ public class TarefasService {
     }
 
     public List<Tarefas> listarTarefasUsuarios(Long id){
-        return tarefasRepository.findByUsuarios(id);
+        Usuarios usuario = usuariosRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return tarefasRepository.findByUsuarios(usuario);
     }
 }

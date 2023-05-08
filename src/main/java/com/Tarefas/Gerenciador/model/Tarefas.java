@@ -23,27 +23,21 @@ import lombok.NoArgsConstructor;
 public class Tarefas implements Serializable {
     private static final long serialVersionUID = 1L;
     
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_tarefa;
 
     private String titulo;
     private String descricao; 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate data_inicio;
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate prazo;
     private String status;
     private String prioridade;
-    
     
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     @JsonIgnore
     private Usuarios usuarios;
-
-
-
-    
 }

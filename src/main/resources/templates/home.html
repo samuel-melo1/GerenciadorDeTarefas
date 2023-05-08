@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas Tarefas</title>
+    <link href="../static/css/listagem.css" th:href="@{/css/listagem.css}" rel="stylesheet" />
     <link rel="shortcut icon" href="#">
+    <link rel="icon" href="data:,">
 </head>
 <body>
   <h1>Minhas Tarefas</h1>
@@ -26,19 +28,16 @@
         <td th:text="${tarefa.id_tarefa}"></td>
         <td th:text="${tarefa.titulo}"></td>
         <td th:text="${tarefa.descricao}"></td>
-        <td th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')}"></td>
-        <td th:text="${#dates.format(tarefa.prazo, 'dd/MM/yyyy')}"></td>
+        <td th:text="${tarefa.data_inicio}"></td>
+        <td th:text="${tarefa.prazo}"></td>
         <td th:text="${tarefa.prioridade}"></td>
         <td th:text="${tarefa.status}"></td>
       </tr>
     </tbody>
   </table>
   <div>
-    <a href="adicionarTarefa.html" th:href="@{adicionarTarefa}">
-      <input type="button" value="Adicionar Tarefa">
-    </a>
-    <a href="logout.html" th:href="@{logout}">
-      <input type="button" value="Sair">
+    <a href="index.html" th:href="@{tarefas}">
+      <input type="button" value="Voltar">
     </a>
   </div>
 </body>
