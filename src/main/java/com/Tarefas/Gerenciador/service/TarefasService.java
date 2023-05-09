@@ -60,8 +60,8 @@ public class TarefasService {
         return tarefasRepository.save(tarefas);
     }
 
-    public void excluirTarefas(Long id) {
-        Optional<Tarefas> tarefas = tarefasRepository.findById(id);
+    public void excluirTarefas(Tarefas tarefa) {
+        Optional<Tarefas> tarefas = tarefasRepository.findById(tarefa.getId_tarefa());
 
         if (!tarefas.isPresent()) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe tarefa");

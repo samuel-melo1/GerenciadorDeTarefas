@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Tarefas</title>
-    <link href="../static/css/listagem.css" th:href="@{/css/listagem.css}" rel="stylesheet" />
-    <link rel="shortcut icon" href="#">
-    <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Tarefas</title>
+  <link href="../static/css/listagem.css" th:href="@{/css/listagem.css}" rel="stylesheet" />
+  <link rel="shortcut icon" href="#">
+  <link rel="icon" href="data:,">
 </head>
+
 <body>
   <h1>Minhas Tarefas</h1>
   <table>
@@ -21,6 +23,9 @@
         <th>Prazo</th>
         <th>Prioridade</th>
         <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -32,6 +37,10 @@
         <td th:text="${tarefa.prazo}"></td>
         <td th:text="${tarefa.prioridade}"></td>
         <td th:text="${tarefa.status}"></td>
+        <td>
+        <td><a th:href="@{/editar/{id}(id=${tarefa.id_tarefa})}" class="btn-editar">Editar</a></td>
+        <td><a th:href="@{/delete/{id}(id=${tarefa.id_tarefa})}" class="btn-excluir">Delete</a></td>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -41,4 +50,5 @@
     </a>
   </div>
 </body>
+
 </html>

@@ -1,18 +1,12 @@
 package com.Tarefas.Gerenciador.controller;
 
 import java.time.LocalDate;
-import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.Tarefas.Gerenciador.dto.TarefasDto;
@@ -58,33 +52,8 @@ public class TarefasController {
         Long id_usuario = (Long) session.getAttribute("id_usuario");
         usuario.setId_usuario(id_usuario);
         tarefas.setUsuarios(usuario);
-        
         ModelAndView mv = new ModelAndView("index");
         tarefasService.criarTarefa(tarefas);
         return mv;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Tarefas>> listarTarefas() {
-        return ResponseEntity.ok().body(tarefasService.listarTarefas());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Tarefas> buscarTarefa(@PathVariable Long id) {
-        return ResponseEntity.ok().body(tarefasService.buscarTarefa(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Tarefas> atualizarTarefa(@PathVariable Long id, @RequestBody @Valid TarefasDto tarefaDto) {
-        var tarefas = new Tarefas();
-        BeanUtils.copyProperties(tarefaDto, tarefas);
-        return ResponseEntity.ok().body(tarefasService.atualizarTarefas(id, tarefas));
-
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Tarefas> deletarTarefa(@PathVariable Long id) {
-        tarefasService.excluirTarefas(id);
-        return ResponseEntity.ok().build();
     }
 }
