@@ -9,7 +9,6 @@ import com.Tarefas.Gerenciador.service.UsuariosService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class UsuariosController {
 
@@ -52,7 +51,7 @@ public class UsuariosController {
         Usuarios usuarioSalvo = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
         ModelAndView mv = new ModelAndView("redirect:/tarefas");
         session.setAttribute("id_usuario", usuarioSalvo.getId_usuario());
-        System.out.println(session.getAttribute("id_usuario"));
         return mv;
     }
 }
+ 
