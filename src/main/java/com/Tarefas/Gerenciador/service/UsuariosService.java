@@ -1,6 +1,4 @@
 package com.Tarefas.Gerenciador.service;
-
-import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.Tarefas.Gerenciador.exceções.NotFoundException;
@@ -16,10 +14,6 @@ public class UsuariosService {
     UsuariosService(UsuariosRepository usuariosRepository) {
         this.usuariosRepository = usuariosRepository;
 
-    }
-
-    public List<Usuarios> listarUsuarios() {
-        return usuariosRepository.findAll();
     }
 
     public Usuarios salvar(Usuarios usuario) {
@@ -50,6 +44,5 @@ public class UsuariosService {
         } else {
             throw new NotFoundException("email e senha não encontrados");
         }
-
     }
 }

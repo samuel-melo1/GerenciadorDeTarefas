@@ -1,5 +1,4 @@
 package com.Tarefas.Gerenciador.service;
-
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
@@ -22,20 +21,8 @@ public class TarefasService {
     }
 
     public Tarefas criarTarefa(Tarefas tarefas) {
-        Optional<Tarefas> tarefaExistenteTitulo = tarefasRepository.existsByTitulo(tarefas.getTitulo());
-        if (tarefaExistenteTitulo.isPresent()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("CONFLICT: Titulo em uso");
-        }
-        Optional<Tarefas> tarefaExistenteDescricao = tarefasRepository.existsByDescricao(tarefas.getDescricao());
-        if (tarefaExistenteDescricao.isPresent()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("CONFILICT: Descrição já em uso");
-        }
+        Optional<Tarefas> tarefasOptional = tarefasRepository.existsByTitulo(tarefas.getTitulo());
         return tarefasRepository.save(tarefas);
-    }
-
-    public List<Tarefas> listarTarefas() {
-        return tarefasRepository.findAll();
-        
     }
 
     public Tarefas buscarTarefa(Long id) {
@@ -56,7 +43,6 @@ public class TarefasService {
         tarefas.setData_inicio(tarefasAtualizada.getData_inicio());
         tarefas.setPrazo(tarefasAtualizada.getPrazo());
         tarefas.setStatus(tarefasAtualizada.getStatus());
-        
         return tarefasRepository.save(tarefas);
     }
 
