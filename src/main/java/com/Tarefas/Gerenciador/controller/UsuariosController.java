@@ -1,4 +1,10 @@
 package com.Tarefas.Gerenciador.controller;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,9 +19,11 @@ import jakarta.servlet.http.HttpSession;
 public class UsuariosController {
 
     private UsuariosService usuariosService;
+    private AuthenticationManager authenticationManager;
 
-    UsuariosController(UsuariosService usuariosService) {
+    UsuariosController(UsuariosService usuariosService, AuthenticationManager authenticationManager) {
         this.usuariosService = usuariosService;
+        this.authenticationManager = authenticationManager;
     }
 
     @GetMapping("/login")
@@ -44,14 +52,17 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session,
-            HttpServletRequest request) {
-        usuarios.setEmail(request.getParameter("email"));  
-        usuarios.setSenha( request.getParameter("senha")); 
-        Usuarios usuarioSalvo = usuariosService.autenticarUsuario(usuarios.getEmail(), usuarios.getSenha());
-        ModelAndView mv = new ModelAndView("redirect:/tarefas");
-        session.setAttribute("id_usuario", usuarioSalvo.getId_usuario());
-        return mv;
+    public ModelAndView loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session) {
+    
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(usuarios.getEmail(), usuarios.getSenha())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return new ModelAndView("redirect:/tarefas");
+        } catch (AuthenticationException e) {
+            // Lidar com a exceção de autenticação aqui
+            return new ModelAndView("redirect:/cadastro");
+        }
     }
 }
- 

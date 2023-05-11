@@ -2,6 +2,8 @@ package com.Tarefas.Gerenciador.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,28 +20,31 @@ import org.springframework.security.web.context.RequestAttributeSecurityContextR
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig  {
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests()
+            .authorizeHttpRequests()
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/cadastro").permitAll()
                 .requestMatchers("/tarefas").authenticated()
                 .anyRequest().permitAll()
-                .and()
+            .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .and()
+            .and()
                 .logout()
                 .logoutSuccessUrl("/")
-                .permitAll()
-                .and();
+                .permitAll();
+
         return http.build();
     }
 
@@ -67,6 +72,14 @@ public class SecurityConfig {
                                 new RequestAttributeSecurityContextRepository(),
                                 new HttpSessionSecurityContextRepository())));
         return http.build();
+    }
+
+    @Bean
+    @Primary
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http
+                .getSharedObject(AuthenticationManagerBuilder.class);
+        return authenticationManagerBuilder.build();
     }
 
 }
