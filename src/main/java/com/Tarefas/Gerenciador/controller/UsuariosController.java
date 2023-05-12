@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,10 +21,12 @@ public class UsuariosController {
 
     private UsuariosService usuariosService;
     private AuthenticationManager authenticationManager;
+    private PasswordEncoder passwordEncoder;
 
-    UsuariosController(UsuariosService usuariosService, AuthenticationManager authenticationManager) {
+    UsuariosController(UsuariosService usuariosService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         this.usuariosService = usuariosService;
         this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/login")
@@ -43,26 +46,26 @@ public class UsuariosController {
     @PostMapping("/cadastro")
     public ModelAndView cadastrar(@ModelAttribute("usuarios") Usuarios usuarios, HttpServletRequest request) {
         usuarios.setNome(request.getParameter("nome"));
-        usuarios.setSenha(request.getParameter("senha"));
+        String senha = request.getParameter("senha");
+        usuarios.setSenha(passwordEncoder.encode(senha));
         usuarios.setEmail(request.getParameter("email"));
         Usuarios usuarioSalvo = usuariosService.salvar(usuarios);
         ModelAndView mv = new ModelAndView("redirect:/login");
         mv.addObject("sucesso", "Usuário criado com sucesso");
         return mv;
     }
-
+/* 
     @PostMapping("/login")
     public ModelAndView loginUser(@ModelAttribute("usuarios") Usuarios usuarios, HttpSession session) {
-    
+
         try {
             Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(usuarios.getEmail(), usuarios.getSenha())
-            );
+                    new UsernamePasswordAuthenticationToken(usuarios.getEmail(), usuarios.getSenha()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return new ModelAndView("redirect:/tarefas");
         } catch (AuthenticationException e) {
-            // Lidar com a exceção de autenticação aqui
-            return new ModelAndView("redirect:/cadastro");
+            return new ModelAndView("redirect:/error");
         }
     }
+    */
 }

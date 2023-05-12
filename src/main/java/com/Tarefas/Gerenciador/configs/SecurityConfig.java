@@ -22,32 +22,27 @@ import org.springframework.security.web.context.RequestAttributeSecurityContextR
 @EnableWebSecurity
 public class SecurityConfig  {
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests()
+                .authorizeHttpRequests()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/cadastro").permitAll()
-                .requestMatchers("/tarefas").authenticated()
+                .requestMatchers("/index").authenticated()
                 .anyRequest().permitAll()
-            .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-            .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .permitAll();
-
+                .and()
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/")
+                        .permitAll());
         return http.build();
     }
-
     @Bean
     public UserDetailsService users() {
         UserDetails user = User.builder()
@@ -55,25 +50,17 @@ public class SecurityConfig  {
                 .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .roles("USER")
                 .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(user);
     }
-
     @Bean
     public SecurityFilterChain filters(HttpSecurity http) throws Exception {
         http
-                // ...
                 .securityContext((securityContext) -> securityContext
                         .securityContextRepository(new DelegatingSecurityContextRepository(
                                 new RequestAttributeSecurityContextRepository(),
                                 new HttpSessionSecurityContextRepository())));
         return http.build();
     }
-
     @Bean
     @Primary
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
@@ -81,5 +68,4 @@ public class SecurityConfig  {
                 .getSharedObject(AuthenticationManagerBuilder.class);
         return authenticationManagerBuilder.build();
     }
-
 }
