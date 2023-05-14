@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Usuarios  {
 
     @Id
@@ -27,5 +26,4 @@ public class Usuarios  {
 
     @OneToMany(mappedBy = "usuarios")
     private List<Tarefas> tarefas;
-
 }

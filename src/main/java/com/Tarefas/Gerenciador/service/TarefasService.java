@@ -1,10 +1,8 @@
 package com.Tarefas.Gerenciador.service;
+
 import java.util.List;
 import java.util.Optional;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.Tarefas.Gerenciador.exceções.NotFoundException;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.model.Usuarios;
@@ -21,18 +19,15 @@ public class TarefasService {
         this.tarefasRepository = tarefasRepository;
         this.usuariosRepository = usuariosRepository;
     }
-
     public Tarefas criarTarefa(Tarefas tarefas) {
         Optional<Tarefas> tarefasOptional = tarefasRepository.existsByTitulo(tarefas.getTitulo());
         return tarefasRepository.save(tarefas);
     }
-
     public Tarefas buscarTarefa(Long id) {
         Optional<Tarefas> tarefasOptional = tarefasRepository.findById(id);
         return tarefasOptional.get();
 
     }
-
     public Tarefas atualizarTarefas(Long id, Tarefas tarefasAtualizada) {
         Optional<Tarefas> tarefasAntiga = tarefasRepository.findById(id);
 
@@ -47,7 +42,6 @@ public class TarefasService {
         tarefas.setStatus(tarefasAtualizada.getStatus());
         return tarefasRepository.save(tarefas);
     }
-
     public void excluirTarefas(Tarefas tarefa) {
         Optional<Tarefas> tarefas = tarefasRepository.findById(tarefa.getId_tarefa());
 

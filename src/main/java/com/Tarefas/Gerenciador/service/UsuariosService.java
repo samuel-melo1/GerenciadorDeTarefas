@@ -1,4 +1,5 @@
 package com.Tarefas.Gerenciador.service;
+
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.Tarefas.Gerenciador.exceções.NotFoundException;
@@ -15,16 +16,13 @@ public class UsuariosService {
         this.usuariosRepository = usuariosRepository;
 
     }
-
     public Usuarios salvar(Usuarios usuario) {
         return usuariosRepository.save(usuario);
     }
-
     public Usuarios buscarUsuarios(Long id) {
         Optional<Usuarios> optionalUser = usuariosRepository.findById(id);
         return optionalUser.get();
     }
-
     public Usuarios buscarPorEmail(String email) {
         Optional<Usuarios> optionalUsuario = usuariosRepository.findByEmail(email);
         if (!optionalUsuario.isPresent()) {
@@ -32,7 +30,6 @@ public class UsuariosService {
         }
         return optionalUsuario.get();
     }
-
     public Usuarios autenticarUsuario(String email, String senha) {
         Optional<Usuarios> usuariosOptional = usuariosRepository.findByEmailAndSenha(email, senha);
         if (usuariosOptional.isPresent()) {

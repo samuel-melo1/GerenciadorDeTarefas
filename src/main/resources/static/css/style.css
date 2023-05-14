@@ -95,3 +95,11 @@ input[type="submit"]:hover,
 input[type="button"]:hover {
   background-color: #3e8e41;
 }
+
+ a .sair{
+
+  background-color: rgba(255, 0, 0, 0.466);
+}
+input[class="sair"]:hover{
+  background-color: rgba(255, 0, 0, 0.466);
+}

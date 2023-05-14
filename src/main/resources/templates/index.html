@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/alerts.js}"></script>
   <link rel="shortcut icon" href="#">
   <link rel="icon" href="data:,">
   <title>Gerenciador de Tarefas</title>
@@ -53,11 +54,11 @@
       <p>
         <a href="login.html" th:href="@{login}">
           <input type="submit" value="Adicionar Tarefa">
-          <input type="button" value="Sair">
-
+          
           <a href="home.html" th:href="@{home}">
             <input type="button" value="Listar Tarefas">
           </a>
+          <a href="login.html" th:href="@{login}"> <input type="button" value="Sair" class="sair" id="sair"> </a>
         </a>
       </p>
     </form>

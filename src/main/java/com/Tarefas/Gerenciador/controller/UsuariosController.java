@@ -1,13 +1,11 @@
 package com.Tarefas.Gerenciador.controller;
 
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.Tarefas.Gerenciador.dto.UsuariosDto;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.service.UsuariosService;
@@ -60,6 +58,13 @@ public class UsuariosController {
         Usuarios usuarioSalvo = usuariosService.autenticarUsuario(usuariosDto.getEmail(), usuariosDto.getSenha());
         ModelAndView mv = new ModelAndView("redirect:/tarefas");
         session.setAttribute("id_usuario", usuarioSalvo.getId_usuario());
+        return mv;
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpSession session){
+        session.invalidate();
+        ModelAndView mv = new ModelAndView("redirect:/login");
         return mv;
     }
 }

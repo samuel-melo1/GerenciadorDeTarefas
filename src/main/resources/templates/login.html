@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/cadastroLogin.css" th:href="@{/css/cadastroLogin.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/alerts.js}"></script>
     <link rel="shortcut icon" href="#">
     <link rel="icon" href="data:,">
 </head>
@@ -41,6 +42,7 @@
                         <a href="cadastro.html" th:href="@{cadastro}">Cadastre-se</a>
                     </p>
                 </form>
+                <p th:if="${mensagem}" th:text="${mensagem}" style="color: green"></p>
             </div>
         </div>
     </div>
