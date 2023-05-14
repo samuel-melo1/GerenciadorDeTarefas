@@ -4,6 +4,8 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.Tarefas.Gerenciador.exceções.NotFoundException;
 import com.Tarefas.Gerenciador.model.Tarefas;
 import com.Tarefas.Gerenciador.model.Usuarios;
 import com.Tarefas.Gerenciador.repository.TarefasRepository;
@@ -35,7 +37,7 @@ public class TarefasService {
         Optional<Tarefas> tarefasAntiga = tarefasRepository.findById(id);
 
         if (!tarefasAntiga.isPresent()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
+            throw new NotFoundException("Tarefa não encontrada");
         }
         Tarefas tarefas = tarefasAntiga.get();
         tarefas.setTitulo(tarefasAtualizada.getTitulo());
@@ -50,20 +52,18 @@ public class TarefasService {
         Optional<Tarefas> tarefas = tarefasRepository.findById(tarefa.getId_tarefa());
 
         if (!tarefas.isPresent()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe tarefa");
+            throw new NotFoundException("Tarefa não encontrada");
         }else{
             tarefasRepository.delete(tarefas.get());
         }
         
     }
-
     public Tarefas criarTarefaUsuario(Tarefas tarefas, Long id_usuario) {
         Usuarios usuario = usuariosRepository.findById(id_usuario)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         tarefas.setUsuarios(usuario);
         return tarefasRepository.save(tarefas);
     }
-
     public List<Tarefas> listarTarefasUsuarios(Long id){
         Usuarios usuario = usuariosRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         return tarefasRepository.findByUsuarios(usuario);

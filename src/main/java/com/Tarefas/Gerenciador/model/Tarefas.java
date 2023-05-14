@@ -3,7 +3,6 @@ package com.Tarefas.Gerenciador.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

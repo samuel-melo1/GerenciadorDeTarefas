@@ -1,8 +1,5 @@
 package com.Tarefas.Gerenciador.service;
-
 import java.util.Optional;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.Tarefas.Gerenciador.exceções.NotFoundException;
 import com.Tarefas.Gerenciador.exceções.LoginInvalidoException;
@@ -13,17 +10,13 @@ import com.Tarefas.Gerenciador.repository.UsuariosRepository;
 public class UsuariosService {
 
     private UsuariosRepository usuariosRepository;
-    private PasswordEncoder passwordEncoder;
 
-    UsuariosService(UsuariosRepository usuariosRepository, PasswordEncoder passwordEncoder) {
+    UsuariosService(UsuariosRepository usuariosRepository) {
         this.usuariosRepository = usuariosRepository;
-        this.passwordEncoder = passwordEncoder;
 
     }
 
     public Usuarios salvar(Usuarios usuario) {
-        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaCriptografada);
         return usuariosRepository.save(usuario);
     }
 
